@@ -9,7 +9,6 @@ static int push_top(t_stack *dst, t_stack *src) {
 }
 
 void pa(t_stack *a, t_stack *b) {
-
   if (push_top(a, b))
     write(STDOUT_FILENO, "pa\n", 3);
 }

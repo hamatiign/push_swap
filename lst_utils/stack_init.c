@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void stack_init(t_stack *stack) {
   if (!stack)

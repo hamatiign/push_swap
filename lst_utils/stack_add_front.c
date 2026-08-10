@@ -1,5 +1,5 @@
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void stack_add_front(t_stack *stack, t_node *node) {
   if (!stack || !node)

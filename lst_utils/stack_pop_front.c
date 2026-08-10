@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_node *stack_pop_front(t_stack *stack) {
   t_node *ret_node;
