@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void node_add_back(t_stack *stack, t_node *node) {
+void stack_add_back(t_stack *stack, t_node *node) {
   if (!stack || !node)
     return;
   if (stack->head == NULL) {

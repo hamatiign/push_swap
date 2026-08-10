@@ -21,7 +21,7 @@ typedef struct s_stack
 /* stack */
 void				stack_init(t_stack *stack);
 t_node				*node_new(int value);
-void				node_add_back(t_stack *stack, t_node *node);
+void				stack_add_back(t_stack *stack, t_node *node);
 void				stack_clear(t_stack *stack);
 
 /* operations */
