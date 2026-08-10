@@ -31,3 +31,13 @@ void sb(t_stack *b) {
   swap_top(b);
   write(STDOUT_FILENO, "sb\n", 3);
 }
+
+void ss(t_stack *a, t_stack *b) {
+  if (!a || a->size < 2)
+    return;
+  if (!b || b->size < 2)
+    return;
+  swap_top(a);
+  swap_top(b);
+  write(STDOUT_FILENO, "ss\n", 3);
+}
