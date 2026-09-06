@@ -18,6 +18,14 @@ typedef struct s_stack
 	int				size;
 }					t_stack;
 
+typedef enum e_strategy
+{
+	STRATEGY_ADAPTIVE,
+	STRATEGY_SIMPLE,
+	STRATEGY_MEDIUM,
+	STRATEGY_COMPLEX
+}	t_strategy;
+
 /* stack */
 t_node				*node_new(int value);
 void	stack_init(t_stack *stack);

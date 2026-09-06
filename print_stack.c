@@ -13,3 +13,5 @@ void print_stack(t_stack *stack) {
   }
   printf("\n");
 }
+
+// TODO ft_printfができ次第printfをそちらに変更
