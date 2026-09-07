@@ -43,6 +43,12 @@ void				ss(t_stack *a, t_stack *b);
 void pa(t_stack *a, t_stack *b);
 void pb(t_stack *a, t_stack *b);
 
+
+/* utils */
+int	ps_strcmp(const char *s1, const char *s2);
+int	ps_isdigit(int c);
+int	ps_atoi(const char *s, int *value);
+
 /* test */
 void print_stack(t_stack *stack); 
 
