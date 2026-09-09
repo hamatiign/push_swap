@@ -1,14 +1,5 @@
-
-#include "push_swap.h"
+#include "../push_swap.h"
 #include <limits.h>
-
-static int	is_space(char c)
-{
-	if (c == 32 || (c >= 9 && c <= 13))
-		return (1);
-	else
-		return (0);
-}
 
 int	ps_atoi(const char *s, int *value)
 {

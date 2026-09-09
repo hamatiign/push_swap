@@ -16,17 +16,14 @@ int	main(int argc, char **argv)
 		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}
-
-  // ーーーテスト用コードーーーーー
+	// ーーーテスト用コードーーーーー
 	stack_add_back(&a, node_new(5));
 	stack_add_back(&a, node_new(1));
 	stack_add_back(&a, node_new(7));
 	stack_add_back(&a, node_new(9));
 	stack_add_back(&b, node_new(3));
 	stack_add_back(&b, node_new(5));
-  // ーーーテスト用コードーーーーー
-
-
+	// ーーーテスト用コードーーーーー
 	/* argvを検証 */
 	/* argvからAを作る */
 	/* disorder計算 */
