@@ -7,8 +7,10 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = \
 	main.c \
 	print_stack.c \
-	push_operations.c \
-	swap_operations.c \
+	operations/push_operations.c \
+	operations/swap_operations.c \
+	operations/rotate_operations.c\
+	operations/rev_rotate_operations.c\
 	lst_utils/node_clear.c \
 	lst_utils/node_new.c \
 	lst_utils/stack_add_back.c \
@@ -21,8 +23,10 @@ SRCS = \
 TEST_SRCS = \
 	testmain.c \
 	print_stack.c \
-	push_operations.c \
-	swap_operations.c \
+	operations/push_operations.c \
+	operations/swap_operations.c \
+	operations/rotate_operations.c\
+	operations/rev_rotate_operations.c\
 	lst_utils/node_new.c \
 	lst_utils/stack_add_back.c \
 	lst_utils/stack_add_front.c \

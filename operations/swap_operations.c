@@ -1,5 +1,4 @@
-#include "push_swap.h"
-#include <unistd.h>
+#include "../push_swap.h"
 
 static void swap_top(t_stack *stack) {
   t_node *first;
