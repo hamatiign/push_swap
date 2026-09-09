@@ -23,6 +23,11 @@ typedef enum e_strategy {
   STRATEGY_COMPLEX
 } t_strategy;
 
+double compute_disorder(t_stack *a);
+void simple_sort(t_stack *a, t_stack *b);
+void medium_sort(t_stack *a, t_stack *b);
+void complex_sort(t_stack *a, t_stack *b);
+
 /* stack */
 t_node *node_new(int value);
 void stack_init(t_stack *stack);
