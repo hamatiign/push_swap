@@ -4,7 +4,7 @@
 int	ps_atoi(const char *s, int *value)
 {
 	int sign;
-	ssize_t result;
+long long result;
 
 	sign = 1;
 	result = 0;
@@ -16,6 +16,7 @@ int	ps_atoi(const char *s, int *value)
 			sign *= -1;
 		s++;
 	}
+  if(*s == '\0') return (0);
 	while (*s)
 	{
 		if (!ps_isdigit(*s))
