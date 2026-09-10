@@ -16,21 +16,21 @@ static void tail_to_head(t_stack *stack) {
 	stack->head->prev = last;
 	last->next = stack->head;
 	stack->head = last;
-	last->prev = last;
+	last->prev = NULL;
 }
 
 void rra(t_stack *a) {
 	if (!a || a->size < 2)
 		return;
 	tail_to_head(a);
-	write(STDOUT_FILENO, "rra\n", 3);
+	write(STDOUT_FILENO, "rra\n", 4);
 }
 
 void rrb(t_stack *b) {
 	if (!b || b->size < 2)
 		return;
 	tail_to_head(b);
-	write(STDOUT_FILENO, "rrb\n", 3);
+	write(STDOUT_FILENO, "rrb\n", 4);
 }
 
 void rrr(t_stack *a, t_stack *b) {
@@ -40,5 +40,5 @@ void rrr(t_stack *a, t_stack *b) {
     return;
   tail_to_head(a);
   tail_to_head(b);
-  write(STDOUT_FILENO, "rrr\n", 3);
+  write(STDOUT_FILENO, "rrr\n", 4);
 }
