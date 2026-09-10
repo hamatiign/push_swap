@@ -18,10 +18,11 @@ static int init_stack_from_array(t_stack *stack, int *arr, int size) {
   return (1);
 }
 
-int main(void) {
+int main(int argc, char **argv) {
   t_stack a;
   t_stack b;
   int values[] = {3, 7, 1, 5};
+  t_strategy strategy;
 
   stack_init(&a);
   stack_init(&b);
@@ -61,6 +62,14 @@ int main(void) {
   print_stack(&a);
   printf("B: ");
   print_stack(&b);
+  
+  printf("\nparse_test\n");
+  stack_clear(&a);
+  stack_init(&a);
+  parse_args(&a, &strategy, argc, argv);
+  printf("A: ");
+  print_stack(&a);
+  printf("strategy_index: %d\n", strategy);
 
   stack_clear(&a);
   stack_clear(&b);

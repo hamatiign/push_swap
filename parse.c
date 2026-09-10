@@ -1,3 +1,85 @@
 #include "push_swap.h"
 
-int	parse_args(t_stack *a, t_strategy *strategy, int argc, char **argv);
+static int	is_option(char *s)
+{
+	if (ps_strcmp(s, "--simple") == 0)
+		return (1);
+	if (ps_strcmp(s, "--medium") == 0)
+		return (1);
+	if (ps_strcmp(s, "--complex") == 0)
+		return (1);
+	if (ps_strcmp(s, "--adaptive") == 0)
+		return (1);
+	return (0);
+}
+
+static int	parse_option(t_strategy *strategy, char *s)
+{
+	if (ps_strcmp(s, "--simple") == 0)
+		*strategy = STRATEGY_SIMPLE;
+	else if (ps_strcmp(s, "--medium") == 0)
+		*strategy = STRATEGY_MEDIUM;
+	else if (ps_strcmp(s, "--complex") == 0)
+		*strategy = STRATEGY_COMPLEX;
+	else if (ps_strcmp(s, "--adaptive") == 0)
+		*strategy = STRATEGY_ADAPTIVE;
+	else
+		return (0);
+	return (1);
+}
+
+static int	has_duplicate(t_stack *a)
+{
+	t_node	*current;
+	t_node	*compare;
+
+	current = a->head;
+	while (current)
+	{
+		compare = current->next;
+		while (compare)
+		{
+			if (current->value == compare->value)
+				return (1);
+			compare = compare->next;
+		}
+		current = current->next;
+	}
+	return (0);
+}
+
+int	parse_args(t_stack *a, t_strategy *strategy, int argc, char **argv)
+{
+	int		i;
+	int		value;
+	t_node	*node;
+
+	i = 1;
+	value = 0;
+	if (!a || !strategy || !argv)
+		return (0);
+	*strategy = STRATEGY_ADAPTIVE;
+	if (i < argc && is_option(argv[i]))
+	{
+		// TODO is_optionとparse_optionの処理がかぶってるからリファクタリングしたい
+		if (!parse_option(strategy, argv[i]))
+			return (0);
+		i++;
+	}
+	if (i >= argc)
+		return (0);
+
+	while (i < argc)
+	{
+		if (!ps_atoi(argv[i], &value))
+			return (0);
+		node = node_new(value);
+		if (node == NULL)
+			return (0);
+		stack_add_back(a, node);
+		i++;
+	}
+	if (has_duplicate(a))
+		return (0);
+	return (1);
+}
