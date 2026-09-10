@@ -20,6 +20,7 @@ SRCS = \
 	lst_utils/stack_init.c \
 	lst_utils/stack_pop_back.c \
 	lst_utils/stack_pop_front.c \
+	lst_utils/set_rank.c \
 	utils/ps_atoi.c \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
@@ -42,6 +43,7 @@ TEST_SRCS = \
 	lst_utils/stack_init.c \
 	lst_utils/stack_pop_back.c \
 	lst_utils/stack_pop_front.c \
+	lst_utils/set_rank.c \
 	utils/ps_atoi.c \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
