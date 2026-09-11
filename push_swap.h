@@ -61,6 +61,7 @@ int ps_atoi(const char *s, int *value);
 int is_sorted(t_stack *stack);
 int get_node_index(t_stack *stack, t_node *target);
 t_node *get_min_node(t_stack *stack);
+t_node *get_max_node(t_stack *stack);
 
 /* test */
 void print_stack(t_stack *stack);

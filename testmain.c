@@ -101,6 +101,16 @@ int main(int argc, char **argv) {
   printf("strategy_index: %d\n", strategy);
   
 
+  printf("\nmedium_sort_test\n");
+  printf("original_A: ");
+  print_stack(&a);
+  medium_sort(&a,&b); 
+  printf("sorted_A: ");
+  print_stack(&a);
+  printf("B: ");
+  print_stack(&b);
+
+
   stack_clear(&a);
   stack_clear(&b);
   return (0);

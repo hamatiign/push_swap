@@ -24,6 +24,7 @@ SRCS = \
 	utils/ps_atoi.c \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
+	sort/utils.c \
 	sort/complex_sort.c \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
@@ -47,6 +48,7 @@ TEST_SRCS = \
 	utils/ps_atoi.c \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
+	sort/utils.c \
 	sort/complex_sort.c \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
@@ -62,7 +64,7 @@ $(NAME): $(OBJS)
 test: $(TEST_NAME)
 
 $(TEST_NAME): $(TEST_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) -o $(TEST_NAME)
+	$(CC) $(CFLAGS) $(TEST_OBJS) -lm -o $(TEST_NAME)
 
 %.o: %.c push_swap.h
 	$(CC) $(CFLAGS) -c $< -o $@
