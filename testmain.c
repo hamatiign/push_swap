@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 		node = node->next;
 	}
 	
-	simple_sort(&a, &b);
+	complex_sort(&a, &b);
 
   printf("initial\n");
   printf("A: ");
