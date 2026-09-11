@@ -29,6 +29,8 @@ int main(int argc, char **argv) {
   if (!init_stack_from_array(&a, values, 4))
     return (1);
 
+	simple_sort(&a, &b);
+
   printf("initial\n");
   printf("A: ");
   print_stack(&a);
@@ -58,6 +60,20 @@ int main(int argc, char **argv) {
 
   printf("\npa\n");
   pa(&a, &b);
+  printf("A: ");
+  print_stack(&a);
+  printf("B: ");
+  print_stack(&b);
+
+  printf("\nra\n");
+  ra(&a);
+  printf("A: ");
+  print_stack(&a);
+  printf("B: ");
+  print_stack(&b);
+
+  printf("\nrra\n");
+  rra(&a);
   printf("A: ");
   print_stack(&a);
   printf("B: ");
