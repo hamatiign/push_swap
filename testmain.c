@@ -29,6 +29,19 @@ int main(int argc, char **argv) {
   if (!init_stack_from_array(&a, values, 4))
     return (1);
 
+	
+	(void)argc;
+	(void)argv;
+	(void)strategy;
+	set_rank(&a);
+	t_node	*node;
+	node = (&a)->head;
+	while (node)
+	{
+		printf("v= %d, rank= %d\n", node->value, node->rank);
+		node = node->next;
+	}
+	
 	simple_sort(&a, &b);
 
   printf("initial\n");
@@ -86,8 +99,11 @@ int main(int argc, char **argv) {
   printf("A: ");
   print_stack(&a);
   printf("strategy_index: %d\n", strategy);
+  
 
   stack_clear(&a);
   stack_clear(&b);
   return (0);
+
+
 }

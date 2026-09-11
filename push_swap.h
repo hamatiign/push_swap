@@ -6,6 +6,7 @@
 
 typedef struct s_node {
   int value;
+  int rank;
   struct s_node *prev;
   struct s_node *next;
 } t_node;
@@ -36,6 +37,7 @@ void stack_add_back(t_stack *stack, t_node *node);
 t_node *stack_pop_front(t_stack *stack);
 t_node *stack_pop_back(t_stack *stack);
 void stack_clear(t_stack *stack);
+void set_rank(t_stack *stack);
 
 /* operations */
 void sa(t_stack *a);
