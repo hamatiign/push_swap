@@ -44,12 +44,12 @@ void sa(t_stack *a);
 void sb(t_stack *b);
 void ss(t_stack *a, t_stack *b);
 
-void				ra(t_stack *a);
-void				rb(t_stack *b);
-void				rr(t_stack *a, t_stack *b);
-void				rra(t_stack *a);
-void				rrb(t_stack *b);
-void				rrr(t_stack *a, t_stack *b);
+void ra(t_stack *a);
+void rb(t_stack *b);
+void rr(t_stack *a, t_stack *b);
+void rra(t_stack *a);
+void rrb(t_stack *b);
+void rrr(t_stack *a, t_stack *b);
 
 void pa(t_stack *a, t_stack *b);
 void pb(t_stack *a, t_stack *b);
@@ -58,6 +58,9 @@ void pb(t_stack *a, t_stack *b);
 int ps_strcmp(const char *s1, const char *s2);
 int ps_isdigit(int c);
 int ps_atoi(const char *s, int *value);
+int is_sorted(t_stack *stack);
+int get_node_index(t_stack *stack, t_node *target);
+t_node *get_min_node(t_stack *stack);
 
 /* test */
 void print_stack(t_stack *stack);
