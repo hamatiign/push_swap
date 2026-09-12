@@ -15,7 +15,7 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-void	complex_sort(t_stack *a, t_stack *b)
+void	complex_sort(t_stack *a, t_stack *b, t_context *ctx)
 {
 	int		max_bits;
 	int		bit;
@@ -31,12 +31,12 @@ void	complex_sort(t_stack *a, t_stack *b)
 		while (i++ < a_size)
 		{
 			if ((a->head->rank >> bit) & 1)
-				ra(a);
+				ra(a, ctx);
 			else
-				pb(a, b);
+				pb(a, b, ctx);
 		}
 		while (b->head)
-			pa(a, b);
+			pa(a, b, ctx);
 		bit++;
 	}
 }
