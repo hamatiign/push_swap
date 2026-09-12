@@ -1,7 +1,7 @@
 #include "../push_swap.h"
 #include <math.h>
 
-void medium_sort(t_stack *a, t_stack *b) {
+void medium_sort(t_stack *a, t_stack *b, t_context *ctx) {
   const int chunk_size = ceil(sqrt(a->size));
   int chunk_number = 0;
   int size;
@@ -10,9 +10,9 @@ void medium_sort(t_stack *a, t_stack *b) {
     while (size-- > 0) {
       if (a->head->rank >= chunk_size * chunk_number &&
           a->head->rank < chunk_size * (chunk_number + 1)) {
-        pb(a, b);
+        pb(a, b, ctx);
       } else
-        ra(a);
+        ra(a, ctx);
     }
     chunk_number++;
   }
@@ -22,11 +22,11 @@ void medium_sort(t_stack *a, t_stack *b) {
     max_node_index = get_node_index(b, get_max_node(b));
     if (max_node_index <= b->size / 2) {
       while (max_node_index-- > 0)
-        rb(b);
+        rb(b, ctx);
     } else {
       while (max_node_index++ < b->size)
-        rrb(b);
+        rrb(b, ctx);
     }
-    pa(a, b);
+    pa(a, b, ctx);
   }
 }

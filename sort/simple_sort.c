@@ -1,53 +1,6 @@
 #include "../push_swap.h"
 
-static int	get_min_node(t_stack *stack)
-{
-	t_node	*node;
-	int		min;
-
-	node = stack->head;
-	min = node->value;
-	while (node->next)
-	{
-		node = node->next;
-		if (node->value < min)
-			min = node->value;
-	}
-	return (min);
-}
-
-static int	get_node_index(t_stack *stack, int value)
-{
-	t_node	*node;
-	int		index;
-
-	node = stack->head;
-	index = 0;
-	while (node)
-	{
-		if (node->value == value)
-			return (index);
-		node = node->next;
-		index++;
-	}
-	return (-1);
-}
-
-static int	is_sorted(t_stack *stack)
-{
-	t_node	*node;
-
-	node = stack->head;
-	while (node->next)
-	{
-		if(node->value > node->next->value)
-			return(0);
-		node = node->next;
-	}
-	return(1);
-}
-
-void		simple_sort(t_stack *a, t_stack *b)
+void simple_sort(t_stack *a, t_stack *b, t_context *ctx)
 {
 	const int	stack_size = a->size;
 	int			i;
@@ -64,13 +17,13 @@ void		simple_sort(t_stack *a, t_stack *b)
 		if (a_min_index <= a_size / 2)
 		{
 			while (a_min_index-- > 0)
-				ra(a);
+				ra(a,ctx);
 		} else {
 			while (a_min_index++ < a_size)
-				rra(a);
+				rra(a,ctx);
 		}
-		pb(a, b);
+		pb(a, b,ctx);
 	}
 	while (b->size > 0)
-		pa(a, b);
+		pa(a, b,ctx);
 }

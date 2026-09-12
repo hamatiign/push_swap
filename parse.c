@@ -13,16 +13,16 @@ static int	is_option(char *s)
 	return (0);
 }
 
-static int	parse_option(t_strategy *strategy, char *s)
+static int	parse_option(t_context *ctx, char *s)
 {
 	if (ps_strcmp(s, "--simple") == 0)
-		*strategy = STRATEGY_SIMPLE;
+		ctx->strategy = STRATEGY_SIMPLE;
 	else if (ps_strcmp(s, "--medium") == 0)
-		*strategy = STRATEGY_MEDIUM;
+		ctx->strategy = STRATEGY_MEDIUM;
 	else if (ps_strcmp(s, "--complex") == 0)
-		*strategy = STRATEGY_COMPLEX;
+		ctx->strategy = STRATEGY_COMPLEX;
 	else if (ps_strcmp(s, "--adaptive") == 0)
-		*strategy = STRATEGY_ADAPTIVE;
+		ctx->strategy = STRATEGY_ADAPTIVE;
 	else
 		return (0);
 	return (1);
@@ -48,7 +48,7 @@ static int	has_duplicate(t_stack *a)
 	return (0);
 }
 
-int	parse_args(t_stack *a, t_strategy *strategy, int argc, char **argv)
+int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 {
 	int		i;
 	int		value;
@@ -56,13 +56,13 @@ int	parse_args(t_stack *a, t_strategy *strategy, int argc, char **argv)
 
 	i = 1;
 	value = 0;
-	if (!a || !strategy || !argv)
+	if (!a || !ctx|| !argv)
 		return (0);
-	*strategy = STRATEGY_ADAPTIVE;
+	ctx->strategy = STRATEGY_ADAPTIVE;
 	if (i < argc && is_option(argv[i]))
 	{
 		// TODO is_optionとparse_optionの処理がかぶってるからリファクタリングしたい
-		if (!parse_option(strategy, argv[i]))
+		if (!parse_option(ctx, argv[i]))
 			return (0);
 		i++;
 	}

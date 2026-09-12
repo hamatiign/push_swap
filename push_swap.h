@@ -4,6 +4,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+typedef struct s_stats {
+  int total;
+  int sa;
+  int sb;
+  int ss;
+  int pa;
+  int pb;
+  int ra;
+  int rb;
+  int rr;
+  int rra;
+  int rrb;
+  int rrr;
+} t_stats;
+
 typedef struct s_node {
   int value;
   int rank;
@@ -24,9 +39,16 @@ typedef enum e_strategy {
   STRATEGY_COMPLEX
 } t_strategy;
 
+typedef struct s_context {
+  t_stats stats;
+  t_strategy strategy;
+  double disorder;
+  int bench;
+} t_context;
+
 double compute_disorder(t_stack *a);
-void simple_sort(t_stack *a, t_stack *b);
-void medium_sort(t_stack *a, t_stack *b);
+void simple_sort(t_stack *a, t_stack *b, t_context *ctx);
+void medium_sort(t_stack *a, t_stack *b, t_context *ctx);
 void complex_sort(t_stack *a, t_stack *b);
 
 /* stack */
@@ -40,19 +62,19 @@ void stack_clear(t_stack *stack);
 void set_rank(t_stack *stack);
 
 /* operations */
-void sa(t_stack *a);
-void sb(t_stack *b);
-void ss(t_stack *a, t_stack *b);
+void sa(t_stack *a, t_context *ctx);
+void sb(t_stack *b, t_context *ctx);
+void ss(t_stack *a, t_stack *b, t_context *ctx);
 
-void ra(t_stack *a);
-void rb(t_stack *b);
-void rr(t_stack *a, t_stack *b);
-void rra(t_stack *a);
-void rrb(t_stack *b);
-void rrr(t_stack *a, t_stack *b);
+void ra(t_stack *a, t_context *ctx);
+void rb(t_stack *b, t_context *ctx);
+void rr(t_stack *a, t_stack *b, t_context *ctx);
+void rra(t_stack *a, t_context *ctx);
+void rrb(t_stack *b, t_context *ctx);
+void rrr(t_stack *a, t_stack *b, t_context *ctx);
 
-void pa(t_stack *a, t_stack *b);
-void pb(t_stack *a, t_stack *b);
+void pa(t_stack *a, t_stack *b, t_context *ctx);
+void pb(t_stack *a, t_stack *b, t_context *ctx);
 
 /* utils */
 int ps_strcmp(const char *s1, const char *s2);
@@ -65,5 +87,5 @@ t_node *get_max_node(t_stack *stack);
 
 /* test */
 void print_stack(t_stack *stack);
-int parse_args(t_stack *a, t_strategy *strategy, int argc, char **argv);
+int parse_args(t_stack *a, t_context *ctx, int argc, char **argv);
 #endif

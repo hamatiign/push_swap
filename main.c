@@ -14,13 +14,13 @@ int	main(int argc, char **argv)
 {
 	t_stack		a;
 	t_stack		b;
-	t_strategy	strategy;
+t_context ctx;
 
 	if (argc == 1)
 		return (0);
 	stack_init(&a);
 	stack_init(&b);
-	if (!parse_args(&a, &strategy, argc, argv))
+	if (!parse_args(&a, &ctx.strategy, argc, argv))
 	{
 		stack_clear(&a);
 		write(STDERR_FILENO, "Error\n", 6);

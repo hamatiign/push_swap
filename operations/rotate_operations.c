@@ -19,26 +19,29 @@ static void head_to_tail(t_stack *stack) {
 	first->next = NULL;
 }
 
-void ra(t_stack *a) {
+void ra(t_stack *a, t_context *ctx) {
 	if (!a || a->size < 2)
 		return;
 	head_to_tail(a);
+  ctx->stats.ra++;
 	write(STDOUT_FILENO, "ra\n", 3);
 }
 
-void rb(t_stack *b) {
+void rb(t_stack *b, t_context *ctx) {
 	if (!b || b->size < 2)
 		return;
 	head_to_tail(b);
+  ctx->stats.rb++;
 	write(STDOUT_FILENO, "rb\n", 3);
 }
 
-void rr(t_stack *a, t_stack *b) {
+void rr(t_stack *a, t_stack *b, t_context *ctx) {
   if (!a || a->size < 2)
     return;
   if (!b || b->size < 2)
     return;
   head_to_tail(a);
   head_to_tail(b);
+  ctx->stats.rr++;
   write(STDOUT_FILENO, "rr\n", 3);
 }

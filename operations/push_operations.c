@@ -7,12 +7,16 @@ static int push_top(t_stack *dst, t_stack *src) {
   return (1);
 }
 
-void pa(t_stack *a, t_stack *b) {
-  if (push_top(a, b))
+void pa(t_stack *a, t_stack *b, t_context *ctx) {
+  if (push_top(a, b)){
+    ctx->stats.pa++;
     write(STDOUT_FILENO, "pa\n", 3);
+  }
 }
 
-void pb(t_stack *a, t_stack *b) {
-  if (push_top(b, a))
+void pb(t_stack *a, t_stack *b, t_context *ctx) {
+  if (push_top(b, a)){
+    ctx->stats.pb++;
     write(STDOUT_FILENO, "pb\n", 3);
+  }
 }

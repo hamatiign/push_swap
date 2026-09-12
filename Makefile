@@ -49,9 +49,9 @@ TEST_SRCS = \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
 	sort/utils.c \
-	sort/complex_sort.c \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
+	# sort/complex_sort.c \
 
 OBJS = $(SRCS:.c=.o)
 TEST_OBJS = $(TEST_SRCS:.c=.o)
