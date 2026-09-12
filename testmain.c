@@ -18,30 +18,86 @@ static int init_stack_from_array(t_stack *stack, int *arr, int size) {
   return (1);
 }
 
+
+
+static t_strategy	set_adaptive_algo(double disorder)
+{
+	t_strategy	algo;
+
+	if(disorder < 0.2)
+		algo = STRATEGY_SIMPLE;
+	else if(disorder < 0.5)
+		algo = STRATEGY_MEDIUM;
+	else
+		algo = STRATEGY_COMPLEX;
+	return (algo);
+}
+
+static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
+	//double		disorder;
+	//disorder = compute_disorder(a);
+	/*
+		disorder　の計算はadaptive以外でも行う必要があるため、
+		もっとでかいスコープでやっとく.
+	*/
+
+	t_strategy	algo;
+
+
+	if(disorder < 0.2)
+		simple_sort(a, b, ctx);
+	else if(disorder < 0.5)
+		medium_sort(a, b, ctx);
+	else
+		complex_sort(a, b, ctx);
+}
+
+
+//  ↓↓　デバッグ表示用のやつ.
+
 static char	*get_strategy_name(t_strategy strategy)
 {
 	if (strategy == STRATEGY_SIMPLE)
-		return ("simple");
+		return ("Simple");
 	if (strategy == STRATEGY_MEDIUM)
-		return ("medium");
+		return ("Medium");
 	if (strategy == STRATEGY_COMPLEX)
-		return ("complex");
-	return ("adaptive");
+		return ("Complex");
+	return ("Adaptive");
+}
+
+static char	*get_order(t_context *ctx)
+{
+	t_strategy	algo;
+	
+	if (ctx->strategy == STRATEGY_ADAPTIVE)
+		algo = set_adaptive_algo(ctx->disorder);
+	else
+		algo = ctx->strategy;
+	
+	if (algo == STRATEGY_SIMPLE)
+		return ("O(n²)");
+	else if (algo == STRATEGY_MEDIUM)
+		return ("O(n√n)");
+	else
+		return ("O(nlogn)");
 }
 
 static int print_ctx(t_context *ctx){
-  printf("disorder: %f\n", ctx->disorder);
-  printf("pa: %i\n", ctx->stats.pa);
-  printf("pb: %i\n", ctx->stats.pb);
-  printf("sa: %i\n", ctx->stats.sa);
-  printf("sb: %i\n", ctx->stats.sb);
-  printf("ss: %i\n", ctx->stats.ss);
-  printf("ra: %i\n", ctx->stats.ra);
-  printf("rb: %i\n", ctx->stats.rb);
-  printf("rra: %i\n", ctx->stats.rra);
-  printf("rrb: %i\n", ctx->stats.rrb);
-  printf("rrr: %i\n", ctx->stats.rrr);
-  printf("strategy: %s\n", get_strategy_name(ctx->strategy));
+	printf("disorder:  %.2f%%\n", ctx->disorder);
+	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_strategy_order(ctx));
+	if (ctx)
+	printf("pa: %i\n", ctx->stats.pa);
+	printf("pb: %i\n", ctx->stats.pb);
+	printf("sa: %i\n", ctx->stats.sa);
+	printf("sb: %i\n", ctx->stats.sb);
+	printf("ss: %i\n", ctx->stats.ss);
+	printf("ra: %i\n", ctx->stats.ra);
+	printf("rb: %i\n", ctx->stats.rb);
+	printf("rra: %i\n", ctx->stats.rra);
+	printf("rrb: %i\n", ctx->stats.rrb);
+	printf("rrr: %i\n", ctx->stats.rrr);
+ 
   return (0);
 }
 
@@ -135,30 +191,30 @@ int main(int argc, char **argv) {
   printf("B: ");
   print_stack(&b);
   
-  printf("\nparse_test\n");
-  stack_clear(&a);
-  stack_clear(&b);
-  stack_init(&a);
-  stack_init(&b);
-  parse_args(&a,&ctx, argc, argv);
-  printf("A: ");
-  print_stack(&a);
+//  printf("\nparse_test\n");
+//  stack_clear(&a);
+//  stack_clear(&b);
+//  stack_init(&a);
+//  stack_init(&b);
+//  parse_args(&a,&ctx, argc, argv);
+//  printf("A: ");
+//  print_stack(&a);
   
 
 
-  printf("init_stats");
-  init_stats(&ctx.stats);
+//  printf("init_stats");
+//  init_stats(&ctx.stats);
 
-  set_rank(&a);
+//  set_rank(&a);
 
-  printf("\nmedium_sort_test\n");
-  printf("original_A: ");
-  print_stack(&a);
-  medium_sort(&a,&b, &ctx); 
-  printf("sorted_A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
+//  printf("\nmedium_sort_test\n");
+//  printf("original_A: ");
+//  print_stack(&a);
+//  medium_sort(&a,&b, &ctx); 
+//  printf("sorted_A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
 
   printf("\nctx_test\n");
   print_ctx(&ctx);
