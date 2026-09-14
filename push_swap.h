@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+# define SIMPLE_SORT_MAX_DISORDER  0.2
+# define MEDIUM_SORT_MAX_DISORDER  0.5
 typedef struct s_stats {
   int total;
   int sa;

@@ -18,35 +18,17 @@ static int init_stack_from_array(t_stack *stack, int *arr, int size) {
   return (1);
 }
 
-
-
-static t_strategy	set_adaptive_algo(double disorder)
-{
-	t_strategy	algo;
-
-	if(disorder < 0.2)
-		algo = STRATEGY_SIMPLE;
-	else if(disorder < 0.5)
-		algo = STRATEGY_MEDIUM;
-	else
-		algo = STRATEGY_COMPLEX;
-	return (algo);
-}
-
 static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
-	//double		disorder;
-	//disorder = compute_disorder(a);
 	/*
 		disorder　の計算はadaptive以外でも行う必要があるため、
 		もっとでかいスコープでやっとく.
 	*/
 
-	t_strategy	algo;
+	const double	disorder = ctx->disorder;
 
-
-	if(disorder < 0.2)
+	if(disorder < SIMPLE_SORT_MAX_DISORDER)
 		simple_sort(a, b, ctx);
-	else if(disorder < 0.5)
+	else if(disorder < MEDIUM_SORT_MAX_DISORDER)
 		medium_sort(a, b, ctx);
 	else
 		complex_sort(a, b, ctx);
@@ -69,12 +51,20 @@ static char	*get_strategy_name(t_strategy strategy)
 static char	*get_order(t_context *ctx)
 {
 	t_strategy	algo;
+	double		disorder;
 	
 	if (ctx->strategy == STRATEGY_ADAPTIVE)
-		algo = set_adaptive_algo(ctx->disorder);
+	{
+		disorder = ctx->disorder;
+		if(disorder < SIMPLE_SORT_MAX_DISORDER)
+			algo = STRATEGY_SIMPLE;
+		else if(disorder < MEDIUM_SORT_MAX_DISORDER)
+			algo = STRATEGY_MEDIUM;
+		else
+			algo = STRATEGY_COMPLEX;
+	}
 	else
 		algo = ctx->strategy;
-	
 	if (algo == STRATEGY_SIMPLE)
 		return ("O(n²)");
 	else if (algo == STRATEGY_MEDIUM)
