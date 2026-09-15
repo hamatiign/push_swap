@@ -131,6 +131,16 @@ int main(int argc, char **argv) {
   stack_init(&b);
 //  if (!init_stack_from_array(&a, values, 4))
 //    return (1);
+  printf("\nparse_test\n");
+  stack_clear(&a);
+  stack_clear(&b);
+  stack_init(&a);
+  stack_init(&b);
+//  (void)argc;
+//	(void)argv;
+  printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
+  printf("A: ");
+  print_stack(&a);
 
 	
 	
@@ -199,16 +209,7 @@ int main(int argc, char **argv) {
 //  printf("B: ");
 //  print_stack(&b);
   
-  printf("\nparse_test\n");
-  stack_clear(&a);
-  stack_clear(&b);
-  stack_init(&a);
-  stack_init(&b);
-//  (void)argc;
-//	(void)argv;
-  parse_args(&a,&ctx, argc, argv);
-  printf("A: ");
-  print_stack(&a);
+
   
 
 
