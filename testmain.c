@@ -37,7 +37,7 @@ static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
 
 //  ↓↓　デバッグ表示用のやつ.
 
-static char	*get_strategy_name(t_strategy strategy)
+static char	*get_strategy_name(const t_strategy strategy)
 {
 	if (strategy == STRATEGY_SIMPLE)
 		return ("Simple");
@@ -48,7 +48,7 @@ static char	*get_strategy_name(t_strategy strategy)
 	return ("Adaptive");
 }
 
-static char	*get_order(t_context *ctx)
+static char	*get_order(const t_context *ctx)
 {
 	t_strategy	algo;
 	double		disorder;
@@ -73,28 +73,35 @@ static char	*get_order(t_context *ctx)
 		return ("O(nlogn)");
 }
 
-static int get_total_ops(t_context *ctx)
+static int set_total_ops(t_stats *stats)
 {
-	t_stats *stats = &(ctx->stats);
-	return (ctx->)
+	return (stats->pa + stats->pb
+			+ stats->sa + stats->sb + stats->ss 
+			+ stats->ra + stats->rb + stats->rr
+			+ stats->rra + stats->rrb + stats->rrr);
 }
 
-static int print_ctx(t_context *ctx){
+void print_stats(t_stats stats)
+{
+	printf("total_ops:  %d\n", stats.total);
+	printf("sa:  %i  ", stats.sa);
+	printf("sb:  %i  ", stats.sb);
+	printf("ss:  %i  ", stats.ss);
+	printf("pa:  %i  ", stats.pa);
+	printf("pb:  %i\n", stats.pb);
+	printf("ra: %i ", stats.ra);
+	printf("rb:  %i ", stats.rb);
+	printf("rr:  %i ", stats.rr);
+	printf("rra:  %i  ", stats.rra);
+	printf("rrb:  %i  ", stats.rrb);
+	printf("rrr:  %i\n", stats.rrr);
+}
+
+static void print_ctx(const t_context *ctx){
 	printf("disorder:  %.2f%%\n", ctx->disorder);
-	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_strategy_order(ctx));
-	printf("total_ops:  %d\n", ctx->stats.total);
-	printf("pa: %i\n", ctx->stats.pa);
-	printf("pb: %i\n", ctx->stats.pb);
-	printf("sa: %i\n", ctx->stats.sa);
-	printf("sb: %i\n", ctx->stats.sb);
-	printf("ss: %i\n", ctx->stats.ss);
-	printf("ra: %i\n", ctx->stats.ra);
-	printf("rb: %i\n", ctx->stats.rb);
-	printf("rra: %i\n", ctx->stats.rra);
-	printf("rrb: %i\n", ctx->stats.rrb);
-	printf("rrr: %i\n", ctx->stats.rrr);
- 
-  return (0);
+	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
+	print_stats(ctx->stats);
+  return ;
 }
 
 void	init_stats(t_stats *stats)
@@ -137,7 +144,13 @@ int main(int argc, char **argv) {
 		node = node->next;
 	}
 	
-	// complex_sort(&a, &b);
+	//////////////////////////////////////
+	ctx.disorder = 0.345;
+	ctx.strategy = STRATEGY_ADAPTIVE;
+	 adaptive_sort(&a, &b, &ctx);
+	 ctx.stats.total = set_total_ops(&ctx.stats);
+	 print_ctx(&ctx);
+//////////////////////////////////////////////
 
   printf("initial\n");
   printf("A: ");
@@ -212,8 +225,8 @@ int main(int argc, char **argv) {
 //  printf("B: ");
 //  print_stack(&b);
 
-  printf("\nctx_test\n");
-  print_ctx(&ctx);
+//  printf("\nctx_test\n");
+//  print_ctx(&ctx);
 
 
   stack_clear(&a);

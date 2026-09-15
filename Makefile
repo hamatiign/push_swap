@@ -51,7 +51,7 @@ TEST_SRCS = \
 	sort/utils.c \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
-	# sort/complex_sort.c \
+	sort/complex_sort.c \
 
 OBJS = $(SRCS:.c=.o)
 TEST_OBJS = $(TEST_SRCS:.c=.o)
