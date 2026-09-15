@@ -73,10 +73,16 @@ static char	*get_order(t_context *ctx)
 		return ("O(nlogn)");
 }
 
+static int get_total_ops(t_context *ctx)
+{
+	t_stats *stats = &(ctx->stats);
+	return (ctx->)
+}
+
 static int print_ctx(t_context *ctx){
 	printf("disorder:  %.2f%%\n", ctx->disorder);
 	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_strategy_order(ctx));
-	if (ctx)
+	printf("total_ops:  %d\n", ctx->stats.total);
 	printf("pa: %i\n", ctx->stats.pa);
 	printf("pb: %i\n", ctx->stats.pb);
 	printf("sa: %i\n", ctx->stats.sa);
