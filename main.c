@@ -1,38 +1,15 @@
 #include "push_swap.h"
 
-//static t_strategy	set_adaptive_algo(double disorder)
-//{
-//	t_strategy	algo;
-
-//	if(disorder < 0.2)
-//		algo = STRATEGY_SIMPLE;
-//	else if(disorder < 0.5)
-//		algo = STRATEGY_MEDIUM;
-//	else
-//		algo = STRATEGY_COMPLEX;
-//	return (algo)
-//}
-
-//static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
-//	double		disorder;
-//	t_strategy	algo;
-
-
-
-//	disorder = compute_disorder(a);
-//	if(disorder < 0.2)
-//		simple_sort(a, b, ctx);
-//	else if(disorder < 0.5)
-//		medium_sort(a, b, ctx);
-//	else
-//		complex_sort(a, b, ctx);
-//}
-
 int	main(int argc, char **argv)
 {
 	t_stack		a;
 	t_stack		b;
-t_context ctx;
+	t_context ctx;
+	init_stats(&ctx.stats);
+	stack_init(&a);
+	stack_init(&b);
+	if (!init_stack_from_array(&a, values, 4))
+		return (1);
 
 	if (argc == 1)
 		return (0);

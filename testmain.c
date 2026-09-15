@@ -1,22 +1,22 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-static int init_stack_from_array(t_stack *stack, int *arr, int size) {
-  t_node *node;
-  int i;
+//static int init_stack_from_array(t_stack *stack, int *arr, int size) {
+//  t_node *node;
+//  int i;
 
-  i = 0;
-  while (i < size) {
-    node = node_new(arr[i]);
-    if (!node) {
-      stack_clear(stack);
-      return (0);
-    }
-    stack_add_back(stack, node);
-    i++;
-  }
-  return (1);
-}
+//  i = 0;
+//  while (i < size) {
+//    node = node_new(arr[i]);
+//    if (!node) {
+//      stack_clear(stack);
+//      return (0);
+//    }
+//    stack_add_back(stack, node);
+//    i++;
+//  }
+//  return (1);
+//}
 
 static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
 	/*
@@ -123,18 +123,17 @@ void	init_stats(t_stats *stats)
 int main(int argc, char **argv) {
   t_stack a;
   t_stack b;
-  int values[] = {3, 7, 1, 5};
+  //int values[] = {3, 7, 1, 5};
   t_context ctx;
   init_stats(&ctx.stats);
 
   stack_init(&a);
   stack_init(&b);
-  if (!init_stack_from_array(&a, values, 4))
-    return (1);
+//  if (!init_stack_from_array(&a, values, 4))
+//    return (1);
 
 	
-	(void)argc;
-	(void)argv;
+	
 	set_rank(&a);
 	t_node	*node;
 	node = (&a)->head;
@@ -152,62 +151,64 @@ int main(int argc, char **argv) {
 	 print_ctx(&ctx);
 //////////////////////////////////////////////
 
-  printf("initial\n");
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\nsa\n");
-  sa(&a, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\npb\n");
-  pb(&a, &b, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\npb\n");
-  pb(&a, &b, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\npa\n");
-  pa(&a, &b, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\nra\n");
-  ra(&a, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-
-  printf("\nrra\n");
-  rra(&a, &ctx);
-  printf("A: ");
-  print_stack(&a);
-  printf("B: ");
-  print_stack(&b);
-  
-//  printf("\nparse_test\n");
-//  stack_clear(&a);
-//  stack_clear(&b);
-//  stack_init(&a);
-//  stack_init(&b);
-//  parse_args(&a,&ctx, argc, argv);
+//  printf("initial\n");
 //  printf("A: ");
 //  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\nsa\n");
+//  sa(&a, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\npb\n");
+//  pb(&a, &b, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\npb\n");
+//  pb(&a, &b, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\npa\n");
+//  pa(&a, &b, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\nra\n");
+//  ra(&a, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+
+//  printf("\nrra\n");
+//  rra(&a, &ctx);
+//  printf("A: ");
+//  print_stack(&a);
+//  printf("B: ");
+//  print_stack(&b);
+  
+  printf("\nparse_test\n");
+  stack_clear(&a);
+  stack_clear(&b);
+  stack_init(&a);
+  stack_init(&b);
+//  (void)argc;
+//	(void)argv;
+  parse_args(&a,&ctx, argc, argv);
+  printf("A: ");
+  print_stack(&a);
   
 
 
