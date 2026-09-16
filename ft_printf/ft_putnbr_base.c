@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkato <nkato@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 20:42:32 by nkato             #+#    #+#             */
-/*   Updated: 2026/08/10 23:02:54 by nkato            ###   ########.fr       */
+/*   Updated: 2026/09/16 21:26:28 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	check_base_error(char *base)
 	return (0);
 }
 
-static int	putnbr_base_recursion(char *base, size_t base_len, uintptr_t nbr)
+static int	putnbr_base_recursion(int fd, char *base, size_t base_len, uintptr_t nbr)
 {
 	uintptr_t	quotient;
 	uintptr_t	remainder;
@@ -76,22 +76,22 @@ static int	putnbr_base_recursion(char *base, size_t base_len, uintptr_t nbr)
 	if (nbr < base_len)
 	{
 		c = base[nbr];
-		if (write(STDOUT_FILENO, &c, 1) < 0)
+		if (write(fd, &c, 1) < 0)
 			return (-1);
 		return (1);
 	}
-	result = putnbr_base_recursion(base, base_len, quotient);
+	result = putnbr_base_recursion(fd, base, base_len, quotient);
 	if (result < 0)
 		return (-1);
 	count += result;
 	c = base[remainder];
-	if (write(STDOUT_FILENO, &c, 1) < 0)
+	if (write(fd, &c, 1) < 0)
 		return (-1);
 	count++;
 	return (count);
 }
 
-int	ft_putnbr_base(uintptr_t nbr, char *base)
+int	ft_putnbr_base(int fd, uintptr_t nbr, char *base)
 {
 	size_t	base_len;
 	int		result;
@@ -99,7 +99,7 @@ int	ft_putnbr_base(uintptr_t nbr, char *base)
 	if (check_base_error(base))
 		return (-1);
 	base_len = ft_strlen(base);
-	result = putnbr_base_recursion(base, base_len, nbr);
+	result = putnbr_base_recursion(fd, base, base_len, nbr);
 	if (result < 0)
 		return (-1);
 	return (result);

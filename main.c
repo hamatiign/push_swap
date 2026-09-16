@@ -41,20 +41,6 @@ static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 	}
 }
 
-/*first > second , second > third
-3 2 1
-
-first > second, second < third
-	first > third
-	3 1 2
-	first < third
-	2 1 3
-
-first < second , second > third
-	1 3 2
-
-	2 3 1
-	*/
 
 static void	sort_mini(t_stack *a, t_stack *b, t_context *ctx)
 {
@@ -88,15 +74,29 @@ static void sort_three(t_stack *a, t_stack *b, t_context *ctx)
 				ra(a, ctx);
 			else
 				sa(a, ctx);
-		} else {
-			if (second )
 		}
-	} else 
-	{
+	} else {
 		if (second > third)
-
+			sa(a, ctx);
+		rra (a, ctx);
 	}
 }
+
+
+/*first > second , second > third
+3 2 1
+
+first > second, second < third
+	first > third
+	3 1 2
+	first < third
+	2 1 3
+
+first < second , second > third
+	1 3 2
+
+	2 3 1
+	*/
 
 int	main(int argc, char **argv)
 {
@@ -131,13 +131,13 @@ int	main(int argc, char **argv)
 	// 2 toka 3 toka no  sort dousiyou
 	if (a.size <= 3)
 		sort_mini(&a, &b, &ctx);
-
-	sort(&a, &b, &ctx);
+	else
+		sort(&a, &b, &ctx);
 
 	// bench表示 
 	if (ctx.bench)
 	{
-
+		
 	}
 
 

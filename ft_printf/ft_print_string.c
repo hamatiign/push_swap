@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkato <nkato@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 20:36:39 by nkato             #+#    #+#             */
-/*   Updated: 2026/08/10 23:02:59 by nkato            ###   ########.fr       */
+/*   Updated: 2026/09/16 21:25:02 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_string(char *str)
+int	ft_print_string(int fd, char *str)
 {
 	size_t	len;
 	ssize_t	result;
@@ -22,7 +22,7 @@ int	ft_print_string(char *str)
 	len = 0;
 	while (str[len] != '\0')
 		len++;
-	result = write(STDOUT_FILENO, str, len);
+	result = write(fd, str, len);
 	if (result < 0)
 		return (-1);
 	return ((int)result);

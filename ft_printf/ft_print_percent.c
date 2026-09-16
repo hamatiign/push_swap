@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_percent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkato <nkato@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 20:40:57 by nkato             #+#    #+#             */
-/*   Updated: 2026/08/10 23:03:01 by nkato            ###   ########.fr       */
+/*   Updated: 2026/09/16 21:24:09 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_percent(void)
+int	ft_print_percent(int fd)
 {
 	ssize_t	result;
 
-	result = write(STDOUT_FILENO, "%%", 1);
+	result = write(fd, "%%", 1);
 	if (result < 0)
 		return (-1);
 	return ((int)result);

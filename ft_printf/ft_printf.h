@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkato <nkato@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 20:37:29 by nkato             #+#    #+#             */
-/*   Updated: 2026/08/10 23:02:55 by nkato            ###   ########.fr       */
+/*   Updated: 2026/09/16 21:22:25 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include <stdint.h>
 # include <unistd.h>
 
-int	ft_printf(const char *format, ...);
-int	ft_print_char(int c);
-int	ft_print_string(char *str);
-int	ft_print_ptr(void *ptr);
-int	ft_print_int(int n);
-int	ft_print_uint(unsigned int n);
-int	ft_print_hex(unsigned int n, char specifier);
-int	ft_print_percent(void);
-int	ft_putnbr_base(uintptr_t nbr, char *base);
+int	ft_printf(int fd, const char *format, ...);
+int	ft_print_char(int fd, int c);
+int	ft_print_string(int fd, char *str);
+int	ft_print_ptr(int fd, void *ptr);
+int	ft_print_int(int fd, int n);
+int	ft_print_uint(int fd, unsigned int n);
+int	ft_print_hex(int fd, unsigned int n, char specifier);
+int	ft_print_percent(int fd);
+int	ft_putnbr_base(int fd, uintptr_t nbr, char *base);
 
 #endif
