@@ -8,10 +8,9 @@ void print_stack(t_stack *stack) {
     return;
   current = stack->head;
   while (current) {
-    printf("%d_", current->value);
+    ft_printf("%d_", current->value);
     current = current->next;
   }
-  printf("\n");
+  ft_printf("\n");
 }
 
-// TODO ft_printfができ次第printfをそちらに変更

@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "ft_printf/ft_printf.h"
 
 # define SIMPLE_SORT_MAX_DISORDER  0.2
 # define MEDIUM_SORT_MAX_DISORDER  0.5

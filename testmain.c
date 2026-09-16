@@ -59,23 +59,23 @@ static int set_total_ops(t_stats *stats)
 
 void print_stats(t_stats stats)
 {
-	printf("total_ops:  %d\n", stats.total);
-	printf("sa:  %i  ", stats.sa);
-	printf("sb:  %i  ", stats.sb);
-	printf("ss:  %i  ", stats.ss);
-	printf("pa:  %i  ", stats.pa);
-	printf("pb:  %i\n", stats.pb);
-	printf("ra: %i ", stats.ra);
-	printf("rb:  %i ", stats.rb);
-	printf("rr:  %i ", stats.rr);
-	printf("rra:  %i  ", stats.rra);
-	printf("rrb:  %i  ", stats.rrb);
-	printf("rrr:  %i\n", stats.rrr);
+	ft_printf("total_ops:  %d\n", stats.total);
+	ft_printf("sa:  %i  ", stats.sa);
+	ft_printf("sb:  %i  ", stats.sb);
+	ft_printf("ss:  %i  ", stats.ss);
+	ft_printf("pa:  %i  ", stats.pa);
+	ft_printf("pb:  %i\n", stats.pb);
+	ft_printf("ra: %i ", stats.ra);
+	ft_printf("rb:  %i ", stats.rb);
+	ft_printf("rr:  %i ", stats.rr);
+	ft_printf("rra:  %i  ", stats.rra);
+	ft_printf("rrb:  %i  ", stats.rrb);
+	ft_printf("rrr:  %i\n", stats.rrr);
 }
 
 static void print_bench(const t_context *ctx){
-	printf("disorder:  %.2f%%\n", ctx->disorder);
-	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
+	ft_printf("disorder:  %.2f%%\n", ctx->disorder);
+	ft_printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
 	print_stats(ctx->stats);
   return ;
 }
@@ -107,15 +107,15 @@ int main(int argc, char **argv) {
   stack_init(&b);
 //  if (!init_stack_from_array(&a, values, 4))
 //    return (1);
-  printf("\nparse_test\n");
+  ft_printf("\nparse_test\n");
   stack_clear(&a);
   stack_clear(&b);
   stack_init(&a);
   stack_init(&b);
 //  (void)argc;
 //	(void)argv;
-  printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
-  printf("A: ");
+  ft_printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
+  ft_printf("A: ");
   print_stack(&a);
 
 	
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 	node = (&a)->head;
 	while (node)
 	{
-		printf("v= %d, rank= %d\n", node->value, node->rank);
+		ft_printf("v= %d, rank= %d\n", node->value, node->rank);
 		node = node->next;
 	}
 	
@@ -137,73 +137,73 @@ int main(int argc, char **argv) {
 	 print_ctx(&ctx);
 //////////////////////////////////////////////
 
-//  printf("initial\n");
-//  printf("A: ");
+//  ft_printf("initial\n");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nsa\n");
+//  ft_printf("\nsa\n");
 //  sa(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npb\n");
+//  ft_printf("\npb\n");
 //  pb(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npb\n");
+//  ft_printf("\npb\n");
 //  pb(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npa\n");
+//  ft_printf("\npa\n");
 //  pa(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nra\n");
+//  ft_printf("\nra\n");
 //  ra(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nrra\n");
+//  ft_printf("\nrra\n");
 //  rra(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
   
 
   
 
 
-//  printf("init_stats");
+//  ft_printf("init_stats");
 //  init_stats(&ctx.stats);
 
 //  set_rank(&a);
 
-//  printf("\nmedium_sort_test\n");
-//  printf("original_A: ");
+//  ft_printf("\nmedium_sort_test\n");
+//  ft_printf("original_A: ");
 //  print_stack(&a);
 //  medium_sort(&a,&b, &ctx); 
-//  printf("sorted_A: ");
+//  ft_printf("sorted_A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nctx_test\n");
+//  ft_printf("\nctx_test\n");
 //  print_ctx(&ctx);
 
 
