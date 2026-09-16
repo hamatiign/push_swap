@@ -17,7 +17,7 @@
 //  return (1);
 //}
 
-static void sort(t_stack *a, t_stack *b, t_context *ctx)
+static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 {
 	t_strategy	strategy;
 	double		disorder;
@@ -38,6 +38,63 @@ static void sort(t_stack *a, t_stack *b, t_context *ctx)
 			medium_sort(a, b, ctx);
 		else
 			complex_sort(a, b, ctx);
+	}
+}
+
+/*first > second , second > third
+3 2 1
+
+first > second, second < third
+	first > third
+	3 1 2
+	first < third
+	2 1 3
+
+first < second , second > third
+	1 3 2
+
+	2 3 1
+	*/
+
+static void	sort_mini(t_stack *a, t_stack *b, t_context *ctx)
+{
+	if (a->size == 2)
+	{
+		if (a->head->value > a->tail->value)
+			sa(a, ctx);
+	} else{
+		sort_three(a, b, ctx);
+	}
+	return ;
+}
+
+static void sort_three(t_stack *a, t_stack *b, t_context *ctx)
+{
+	int	first;
+	int	second;
+	int third;
+
+	first = a->head->value;
+	second = a->head->next->value;
+	third = a->tail->value;
+	if (first > second)
+	{
+		if (second > third)
+		{
+			ra(a, ctx);
+			sa(a, ctx);
+		} else {
+			if (first > third)
+				ra(a, ctx);
+			else
+				sa(a, ctx);
+		} else {
+			if (second )
+		}
+	} else 
+	{
+		if (second > third)
+
 	}
 }
 
@@ -72,6 +129,9 @@ int	main(int argc, char **argv)
 	// strategy に応じて どのソートにするか決める処理*
 
 	// 2 toka 3 toka no  sort dousiyou
+	if (a.size <= 3)
+		sort_mini(&a, &b, &ctx);
+
 	sort(&a, &b, &ctx);
 
 	// bench表示 
