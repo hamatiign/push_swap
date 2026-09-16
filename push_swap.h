@@ -82,6 +82,7 @@ void pb(t_stack *a, t_stack *b, t_context *ctx);
 int ps_strcmp(const char *s1, const char *s2);
 int ps_isdigit(int c);
 int ps_atoi(const char *s, int *value);
+void ps_putstr_stderr(char *s);
 int is_sorted(t_stack *stack);
 int get_node_index(t_stack *stack, t_node *target);
 t_node *get_min_node(t_stack *stack);
