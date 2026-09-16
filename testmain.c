@@ -1,22 +1,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-//static int init_stack_from_array(t_stack *stack, int *arr, int size) {
-//  t_node *node;
-//  int i;
 
-//  i = 0;
-//  while (i < size) {
-//    node = node_new(arr[i]);
-//    if (!node) {
-//      stack_clear(stack);
-//      return (0);
-//    }
-//    stack_add_back(stack, node);
-//    i++;
-//  }
-//  return (1);
-//}
 
 static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
 	/*
@@ -37,16 +22,7 @@ static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
 
 //  ↓↓　デバッグ表示用のやつ.
 
-static char	*get_strategy_name(const t_strategy strategy)
-{
-	if (strategy == STRATEGY_SIMPLE)
-		return ("Simple");
-	if (strategy == STRATEGY_MEDIUM)
-		return ("Medium");
-	if (strategy == STRATEGY_COMPLEX)
-		return ("Complex");
-	return ("Adaptive");
-}
+
 
 static char	*get_order(const t_context *ctx)
 {
@@ -97,7 +73,7 @@ void print_stats(t_stats stats)
 	printf("rrr:  %i\n", stats.rrr);
 }
 
-static void print_ctx(const t_context *ctx){
+static void print_bench(const t_context *ctx){
 	printf("disorder:  %.2f%%\n", ctx->disorder);
 	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
 	print_stats(ctx->stats);

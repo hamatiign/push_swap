@@ -59,16 +59,20 @@ int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 	if (!a || !ctx|| !argv)
 		return (0);
 	ctx->strategy = STRATEGY_ADAPTIVE;
-	if (i < argc && is_option(argv[i]))
+	if (argv[i] == "--bench")
 	{
-		// TODO is_optionとparse_optionの処理がかぶってるからリファクタリングしたい
-		if (!parse_option(ctx, argv[i]))
-			return (0);
+		ctx->bench = 1;
 		i++;
+	} else
+		ctx->bench = 0;
+	// やりました is_optionとparse_optionの処理がかぶってるからリファクタリングしたい
+	if (i < argc)
+	{
+		if (parse_option(ctx, argv[i]))
+			i++;
 	}
 	if (i >= argc)
 		return (0);
-
 	while (i < argc)
 	{
 		if (!ps_atoi(argv[i], &value))

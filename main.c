@@ -1,39 +1,94 @@
 #include "push_swap.h"
 
+//static int init_stack_from_array(t_stack *stack, int *arr, int size) {
+//  t_node *node;
+//  int i;
+
+//  i = 0;
+//  while (i < size) {
+//    node = node_new(arr[i]);
+//    if (!node) {
+//      stack_clear(stack);
+//      return (0);
+//    }
+//    stack_add_back(stack, node);
+//    i++;
+//  }
+//  return (1);
+//}
+
+static void sort(t_stack *a, t_stack *b, t_context *ctx)
+{
+	t_strategy	strategy;
+	double		disorder;
+	
+	strategy = ctx->strategy;
+	disorder = ctx->disorder;
+	if (strategy == STRATEGY_SIMPLE)
+		simple_sort(a, b, ctx);
+	else if (strategy == STRATEGY_MEDIUM)
+		medium_sort(a, b, ctx);
+	else if (strategy == STRATEGY_COMPLEX)
+		complex_sort(a, b, ctx);
+	else
+	{
+		if(disorder < SIMPLE_SORT_MAX_DISORDER)
+			simple_sort(a, b, ctx);
+		else if(disorder < MEDIUM_SORT_MAX_DISORDER)
+			medium_sort(a, b, ctx);
+		else
+			complex_sort(a, b, ctx);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack		a;
 	t_stack		b;
 	t_context ctx;
-	init_stats(&ctx.stats);
-	stack_init(&a);
-	stack_init(&b);
-	if (!init_stack_from_array(&a, values, 4))
-		return (1);
 
 	if (argc == 1)
 		return (0);
 	stack_init(&a);
-	stack_init(&b);
+
+	/* parse_args に--bench処理を追加する
+		＊argv[1]が--benchならargv[2]にSTRATEGY判定をする
+		みたいなことを多分かけた気がします
+		*/
 	if (!parse_args(&a, &ctx.strategy, argc, argv))
 	{
 		stack_clear(&a);
 		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}
-	// ーーーテスト用コードーーーーー
-	stack_add_back(&a, node_new(5));
-	stack_add_back(&a, node_new(1));
-	stack_add_back(&a, node_new(7));
-	stack_add_back(&a, node_new(9));
-	stack_add_back(&b, node_new(3));
-	stack_add_back(&b, node_new(5));
-	// ーーーテスト用コードーーーーー
-	/* argvを検証 */
-	/* argvからAを作る */
-	/* disorder計算 */
+
+	stack_init(&b);
+	init_stats(&ctx.stats);
+	//必要量のnode を含めたmallocができたかどうか たぶんparse_argsの中でやってる.
+	//if (!init_stack_from_array(&a, values, **ここなに**));
+	//	return (1);
+	ctx.disorder = compute_disorder(&a);
 	/* ソート */
+	// strategy に応じて どのソートにするか決める処理*
+	sort(&a, &b, &ctx);
+
+	// bench表示 
+	if (ctx.bench)
+		print_bench()
+
+
+
+
 	stack_clear(&a);
 	stack_clear(&b);
 	return (0);
 }
+
+	// ーーーテスト用コードーーーーー
+	//stack_add_back(&a, node_new(5));
+	//stack_add_back(&a, node_new(1));
+	//stack_add_back(&a, node_new(7));
+	//stack_add_back(&a, node_new(9));
+	//stack_add_back(&b, node_new(3));
+	//stack_add_back(&b, node_new(5));
+	// ーーーテスト用コードーーーーー
