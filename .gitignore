@@ -2,4 +2,4 @@
 *.a
 push_swap
 test_push_swap
-checker
+*checker*

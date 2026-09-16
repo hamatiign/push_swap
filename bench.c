@@ -35,8 +35,8 @@ static void print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
-void print_bench(const t_context *ctx){
-	set_total_ops(ctx->stats);
+void print_bench(t_context *ctx){
+	ctx->stats.total = set_total_ops(ctx->stats);
 	ft_printf_fd(STDERR_FILENO, "disorder:  %.2f%%\n", ctx->disorder);
 	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n", get_strategy_name(ctx->strategy));
 	print_stats(ctx->stats);

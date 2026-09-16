@@ -105,6 +105,7 @@ int	main(int argc, char **argv)
 		ft_printf_fd(STDERR_FILENO, "Error\n");
 		return (1);
 	}
+	set_rank(&a);
 	stack_init(&b);
 	stats_init(&(ctx.stats));
 	ctx.disorder = compute_disorder(&a);
@@ -115,9 +116,7 @@ int	main(int argc, char **argv)
 
 	// bench表示 
 	if (ctx.bench)
-	{
-		
-	}
+		print_bench(&ctx);
 
 
 
