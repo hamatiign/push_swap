@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 	if (!parse_args(&a, &ctx.strategy, argc, argv))
 	{
 		stack_clear(&a);
-		write(STDERR_FILENO, "Error\n", 6);
+		ps_putstr_stderr("Error\n");
 		return (1);
 	}
 
@@ -70,12 +70,15 @@ int	main(int argc, char **argv)
 	ctx.disorder = compute_disorder(&a);
 	/* ソート */
 	// strategy に応じて どのソートにするか決める処理*
+
+	// 2 toka 3 toka no  sort dousiyou
 	sort(&a, &b, &ctx);
 
 	// bench表示 
 	if (ctx.bench)
-		print_bench()
+	{
 
+	}
 
 
 
