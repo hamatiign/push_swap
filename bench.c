@@ -11,7 +11,7 @@ static char	*get_strategy_name(const t_strategy strategy)
 	return ("Adaptive");
 }
 
-static int set_total_ops(t_stats *stats)
+int set_total_ops(t_stats *stats)
 {
 	return (stats->pa + stats->pb
 			+ stats->sa + stats->sb + stats->ss 
@@ -21,23 +21,23 @@ static int set_total_ops(t_stats *stats)
 
 void print_stats(t_stats stats)
 {
-	printf("total_ops:  %d\n", stats.total);
-	printf("sa:  %i  ", stats.sa);
-	printf("sb:  %i  ", stats.sb);
-	printf("ss:  %i  ", stats.ss);
-	printf("pa:  %i  ", stats.pa);
-	printf("pb:  %i\n", stats.pb);
-	printf("ra: %i ", stats.ra);
-	printf("rb:  %i ", stats.rb);
-	printf("rr:  %i ", stats.rr);
-	printf("rra:  %i  ", stats.rra);
-	printf("rrb:  %i  ", stats.rrb);
-	printf("rrr:  %i\n", stats.rrr);
+	ft_printf("total_ops:  %d\n", stats.total);
+	ft_printf("sa:  %i  ", stats.sa);
+	ft_printf("sb:  %i  ", stats.sb);
+	ft_printf("ss:  %i  ", stats.ss);
+	ft_printf("pa:  %i  ", stats.pa);
+	ft_printf("pb:  %i\n", stats.pb);
+	ft_printf("ra: %i ", stats.ra);
+	ft_printf("rb:  %i ", stats.rb);
+	ft_printf("rr:  %i ", stats.rr);
+	ft_printf("rra:  %i  ", stats.rra);
+	ft_printf("rrb:  %i  ", stats.rrb);
+	ft_printf("rrr:  %i\n", stats.rrr);
 }
 
-static void print_bench(const t_context *ctx){
-	printf("disorder:  %.2f%%\n", ctx->disorder);
-	printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
+void print_bench(const t_context *ctx){
+	ft_printf("disorder:  %.2f%%\n", ctx->disorder);
+	ft_printf("strategy:  %s / %s\n", get_strategy_name(ctx->strategy));
 	print_stats(ctx->stats);
   return ;
 }

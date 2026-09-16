@@ -86,8 +86,9 @@ int main(int argc, char **argv) {
 	ctx.strategy = STRATEGY_ADAPTIVE;
 	 adaptive_sort(&a, &b, &ctx);
 	 ctx.stats.total = set_total_ops(&ctx.stats);
-	 print_ctx(&ctx);
+	 print_bench(&ctx);
 //////////////////////////////////////////////
+
 
 //  ft_printf("initial\n");
 //  ft_printf("A: ");

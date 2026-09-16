@@ -12,7 +12,6 @@ SRCS = \
 	operations/swap_operations.c \
 	operations/rotate_operations.c\
 	operations/rev_rotate_operations.c\
-	lst_utils/node_clear.c \
 	lst_utils/node_new.c \
 	lst_utils/stack_add_back.c \
 	lst_utils/stack_add_front.c \
@@ -28,6 +27,8 @@ SRCS = \
 	sort/complex_sort.c \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
+	bench.c \
+	disorder.c
 
 TEST_SRCS = \
 	testmain.c \
@@ -51,12 +52,12 @@ PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(PRINTF_OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(PRINTF_OBJS) -o $(NAME)
 
 test: $(TEST_NAME)
 
-$(TEST_NAME): $(TEST_OBJS)
+$(TEST_NAME): $(TEST_OBJS) $(PRINTF_OBJS)
 	$(CC) $(CFLAGS) $(TEST_OBJS) $(PRINTF_OBJS) -lm -o $(TEST_NAME)
 
 %.o: %.c push_swap.h ft_printf/ft_printf.h
