@@ -59,15 +59,15 @@ int main(int argc, char **argv) {
   stack_init(&b);
 //  if (!init_stack_from_array(&a, values, 4))
 //    return (1);
-  printf("\nparse_test\n");
+  ft_printf("\nparse_test\n");
   stack_clear(&a);
   stack_clear(&b);
   stack_init(&a);
   stack_init(&b);
 //  (void)argc;
 //	(void)argv;
-  printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
-  printf("A: ");
+  ft_printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
+  ft_printf("A: ");
   print_stack(&a);
 
 	
@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
 	node = (&a)->head;
 	while (node)
 	{
-		printf("v= %d, rank= %d\n", node->value, node->rank);
+		ft_printf("v= %d, rank= %d\n", node->value, node->rank);
 		node = node->next;
 	}
 	
@@ -86,76 +86,77 @@ int main(int argc, char **argv) {
 	ctx.strategy = STRATEGY_ADAPTIVE;
 	 adaptive_sort(&a, &b, &ctx);
 	 ctx.stats.total = set_total_ops(&ctx.stats);
-	 print_ctx(&ctx);
+	 print_bench(&ctx);
 //////////////////////////////////////////////
 
-//  printf("initial\n");
-//  printf("A: ");
+
+//  ft_printf("initial\n");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nsa\n");
+//  ft_printf("\nsa\n");
 //  sa(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npb\n");
+//  ft_printf("\npb\n");
 //  pb(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npb\n");
+//  ft_printf("\npb\n");
 //  pb(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\npa\n");
+//  ft_printf("\npa\n");
 //  pa(&a, &b, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nra\n");
+//  ft_printf("\nra\n");
 //  ra(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nrra\n");
+//  ft_printf("\nrra\n");
 //  rra(&a, &ctx);
-//  printf("A: ");
+//  ft_printf("A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
   
 
   
 
 
-//  printf("init_stats");
+//  ft_printf("init_stats");
 //  init_stats(&ctx.stats);
 
 //  set_rank(&a);
 
-//  printf("\nmedium_sort_test\n");
-//  printf("original_A: ");
+//  ft_printf("\nmedium_sort_test\n");
+//  ft_printf("original_A: ");
 //  print_stack(&a);
 //  medium_sort(&a,&b, &ctx); 
-//  printf("sorted_A: ");
+//  ft_printf("sorted_A: ");
 //  print_stack(&a);
-//  printf("B: ");
+//  ft_printf("B: ");
 //  print_stack(&b);
 
-//  printf("\nctx_test\n");
+//  ft_printf("\nctx_test\n");
 //  print_ctx(&ctx);
 
 

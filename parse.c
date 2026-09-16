@@ -1,17 +1,17 @@
 #include "push_swap.h"
 
-static int	is_option(char *s)
-{
-	if (ps_strcmp(s, "--simple") == 0)
-		return (1);
-	if (ps_strcmp(s, "--medium") == 0)
-		return (1);
-	if (ps_strcmp(s, "--complex") == 0)
-		return (1);
-	if (ps_strcmp(s, "--adaptive") == 0)
-		return (1);
-	return (0);
-}
+// static int	is_option(char *s)
+// {
+// 	if (ps_strcmp(s, "--simple") == 0)
+// 		return (1);
+// 	if (ps_strcmp(s, "--medium") == 0)
+// 		return (1);
+// 	if (ps_strcmp(s, "--complex") == 0)
+// 		return (1);
+// 	if (ps_strcmp(s, "--adaptive") == 0)
+// 		return (1);
+// 	return (0);
+// }
 
 static int	parse_option(t_context *ctx, char *s)
 {
@@ -59,7 +59,7 @@ int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 	if (!a || !ctx|| !argv)
 		return (0);
 	ctx->strategy = STRATEGY_ADAPTIVE;
-	if (argv[i] == "--bench")
+	if (ps_strcmp(argv[i], "--bench") == 0)
 	{
 		ctx->bench = 1;
 		i++;

@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "ft_printf/ft_printf.h"
 
 # define SIMPLE_SORT_MAX_DISORDER  0.2
 # define MEDIUM_SORT_MAX_DISORDER  0.5
@@ -52,6 +53,8 @@ double compute_disorder(t_stack *a);
 void simple_sort(t_stack *a, t_stack *b, t_context *ctx);
 void medium_sort(t_stack *a, t_stack *b, t_context *ctx);
 void complex_sort(t_stack *a, t_stack *b, t_context *ctx);
+void print_bench(const t_context *ctx);
+int set_total_ops(t_stats *stats);
 
 /* stack */
 t_node *node_new(int value);
