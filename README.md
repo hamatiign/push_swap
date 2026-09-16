@@ -4,8 +4,12 @@
 
 ## Description（概要）
 
+ARG=$(shuf -i 1-5000 -n 500); ./push_swap --bench --complex $ARG |./checker_linux $ARG
+
 ARG="-3 -2"; ./push_swap $ARG | ./checker_linux $ARG
 zsh じゃなくて bashで実行する　さもないとARGが空白入りの文字列として認識されてしまうため
+
+3数字の場合分け分からん！！！！あとdouble型の出力かけてない
 
 
 ## Instructions（手順）

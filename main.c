@@ -64,8 +64,13 @@ static void sort_three(t_stack *a, t_context *ctx)
 		}
 	} else {
 		if (second > third)
+		{
+			if (first > third)
+				rra(a, ctx);
+		} else{
 			sa(a, ctx);
-		rra (a, ctx);
+			ra(a, ctx);
+		}
 	}
 }
 
@@ -80,9 +85,13 @@ first > second, second < third
 	2 1 3
 
 first < second , second > third
+	first > third
+	2 3 1
+	first < third
 	1 3 2
 
-	2 3 1
+first < second , second < third	
+1 2 3 (実行しなくて良い)
 	*/
 
 int	main(int argc, char **argv)
