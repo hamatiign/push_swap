@@ -20,33 +20,7 @@ static void adaptive_sort(t_stack *a, t_stack *b, t_context *ctx){
 }
 
 
-//  ↓↓　デバッグ表示用のやつ.
 
-
-
-
-
-
-
-
-
-
-
-void	init_stats(t_stats *stats)
-{
-	stats->total = 0;
-	stats->sa = 0;
-	stats->sb = 0;
-	stats->ss = 0;
-	stats->pa = 0;
-	stats->pb = 0;
-	stats->ra = 0;
-	stats->rb = 0;
-	stats->rr = 0;
-	stats->rra = 0;
-	stats->rrb = 0;
-	stats->rrr = 0;
-}
 
 int main(int argc, char **argv) {
   t_stack a;
@@ -59,15 +33,15 @@ int main(int argc, char **argv) {
   stack_init(&b);
 //  if (!init_stack_from_array(&a, values, 4))
 //    return (1);
-  ft_printf("\nparse_test\n");
+  ft_printf_fd(STDOUT_FILENO, "\nparse_test\n");
   stack_clear(&a);
   stack_clear(&b);
   stack_init(&a);
   stack_init(&b);
 //  (void)argc;
 //	(void)argv;
-  ft_printf("kaeriti = %d", parse_args(&a,&ctx, argc, argv));
-  ft_printf("A: ");
+  ft_printf_fd(STDOUT_FILENO, "kaeriti = %d", parse_args(&a,&ctx, argc, argv));
+  ft_printf_fd(STDOUT_FILENO, "A: ");
   print_stack(&a);
 
 	
@@ -77,7 +51,7 @@ int main(int argc, char **argv) {
 	node = (&a)->head;
 	while (node)
 	{
-		ft_printf("v= %d, rank= %d\n", node->value, node->rank);
+		ft_printf_fd(STDOUT_FILENO, "v= %d, rank= %d\n", node->value, node->rank);
 		node = node->next;
 	}
 	
@@ -90,73 +64,73 @@ int main(int argc, char **argv) {
 //////////////////////////////////////////////
 
 
-//  ft_printf("initial\n");
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "initial\n");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\nsa\n");
+//  ft_printf_fd(STDOUT_FILENO, "\nsa\n");
 //  sa(&a, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\npb\n");
+//  ft_printf_fd(STDOUT_FILENO, "\npb\n");
 //  pb(&a, &b, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\npb\n");
+//  ft_printf_fd(STDOUT_FILENO, "\npb\n");
 //  pb(&a, &b, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\npa\n");
+//  ft_printf_fd(STDOUT_FILENO, "\npa\n");
 //  pa(&a, &b, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\nra\n");
+//  ft_printf_fd(STDOUT_FILENO, "\nra\n");
 //  ra(&a, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\nrra\n");
+//  ft_printf_fd(STDOUT_FILENO, "\nrra\n");
 //  rra(&a, &ctx);
-//  ft_printf("A: ");
+//  ft_printf_fd(STDOUT_FILENO, "A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
   
 
   
 
 
-//  ft_printf("init_stats");
+//  ft_printf_fd(STDOUT_FILENO, "init_stats");
 //  init_stats(&ctx.stats);
 
 //  set_rank(&a);
 
-//  ft_printf("\nmedium_sort_test\n");
-//  ft_printf("original_A: ");
+//  ft_printf_fd(STDOUT_FILENO, "\nmedium_sort_test\n");
+//  ft_printf_fd(STDOUT_FILENO, "original_A: ");
 //  print_stack(&a);
 //  medium_sort(&a,&b, &ctx); 
-//  ft_printf("sorted_A: ");
+//  ft_printf_fd(STDOUT_FILENO, "sorted_A: ");
 //  print_stack(&a);
-//  ft_printf("B: ");
+//  ft_printf_fd(STDOUT_FILENO, "B: ");
 //  print_stack(&b);
 
-//  ft_printf("\nctx_test\n");
+//  ft_printf_fd(STDOUT_FILENO, "\nctx_test\n");
 //  print_ctx(&ctx);
 
 

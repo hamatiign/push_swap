@@ -1,21 +1,9 @@
 #include "push_swap.h"
 
-//static int init_stack_from_array(t_stack *stack, int *arr, int size) {
-//  t_node *node;
-//  int i;
+static void	sort(t_stack *a, t_stack *b, t_context *ctx);
+static void	sort_mini(t_stack *a, t_context *ctx);
+static void sort_three(t_stack *a, t_context *ctx);
 
-//  i = 0;
-//  while (i < size) {
-//    node = node_new(arr[i]);
-//    if (!node) {
-//      stack_clear(stack);
-//      return (0);
-//    }
-//    stack_add_back(stack, node);
-//    i++;
-//  }
-//  return (1);
-//}
 
 static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 {
@@ -41,20 +29,19 @@ static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 	}
 }
 
-
-static void	sort_mini(t_stack *a, t_stack *b, t_context *ctx)
+static void	sort_mini(t_stack *a, t_context *ctx)
 {
 	if (a->size == 2)
 	{
 		if (a->head->value > a->tail->value)
 			sa(a, ctx);
 	} else{
-		sort_three(a, b, ctx);
+		sort_three(a, ctx);
 	}
 	return ;
 }
 
-static void sort_three(t_stack *a, t_stack *b, t_context *ctx)
+static void sort_three(t_stack *a, t_context *ctx)
 {
 	int	first;
 	int	second;
@@ -112,25 +99,17 @@ int	main(int argc, char **argv)
 		＊argv[1]が--benchならargv[2]にSTRATEGY判定をする
 		みたいなことを多分かけた気がします
 		*/
-	if (!parse_args(&a, &ctx.strategy, argc, argv))
+	if (!parse_args(&a, &ctx, argc, argv))
 	{
 		stack_clear(&a);
-		ps_putstr_stderr("Error\n");
+		ft_printf_fd(STDERR_FILENO, "Error\n");
 		return (1);
 	}
-
 	stack_init(&b);
-	init_stats(&ctx.stats);
-	//必要量のnode を含めたmallocができたかどうか たぶんparse_argsの中でやってる.
-	//if (!init_stack_from_array(&a, values, **ここなに**));
-	//	return (1);
+	stats_init(&(ctx.stats));
 	ctx.disorder = compute_disorder(&a);
-	/* ソート */
-	// strategy に応じて どのソートにするか決める処理*
-
-	// 2 toka 3 toka no  sort dousiyou
 	if (a.size <= 3)
-		sort_mini(&a, &b, &ctx);
+		sort_mini(&a, &ctx);
 	else
 		sort(&a, &b, &ctx);
 

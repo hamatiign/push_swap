@@ -20,6 +20,7 @@ SRCS = \
 	lst_utils/stack_pop_back.c \
 	lst_utils/stack_pop_front.c \
 	lst_utils/set_rank.c \
+	lst_utils/stats_init.c \
 	utils/ps_atoi.c \
 	utils/ps_isdigit.c \
 	utils/ps_strcmp.c \
@@ -53,7 +54,7 @@ PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(PRINTF_OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(PRINTF_OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF_OBJS) -lm -o $(NAME)
 
 test: $(TEST_NAME)
 

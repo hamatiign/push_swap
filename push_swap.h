@@ -54,7 +54,6 @@ void simple_sort(t_stack *a, t_stack *b, t_context *ctx);
 void medium_sort(t_stack *a, t_stack *b, t_context *ctx);
 void complex_sort(t_stack *a, t_stack *b, t_context *ctx);
 void print_bench(const t_context *ctx);
-int set_total_ops(t_stats *stats);
 
 /* stack */
 t_node *node_new(int value);
@@ -65,6 +64,7 @@ t_node *stack_pop_front(t_stack *stack);
 t_node *stack_pop_back(t_stack *stack);
 void stack_clear(t_stack *stack);
 void set_rank(t_stack *stack);
+void	stats_init(t_stats *stats);
 
 /* operations */
 void sa(t_stack *a, t_context *ctx);
@@ -90,6 +90,7 @@ int is_sorted(t_stack *stack);
 int get_node_index(t_stack *stack, t_node *target);
 t_node *get_min_node(t_stack *stack);
 t_node *get_max_node(t_stack *stack);
+int	ft_printf_fd(int fd, const char *format, ...);
 
 /* test */
 void print_stack(t_stack *stack);
