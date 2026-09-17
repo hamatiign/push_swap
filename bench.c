@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bench.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/18 01:59:52 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/18 02:01:09 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <math.h>
 
@@ -12,15 +24,15 @@ static char	*get_strategy_name(const t_strategy strategy)
 	return ("Adaptive");
 }
 
-static int set_total_ops(t_stats stats)
+static int	set_total_ops(t_stats stats)
 {
 	return (stats.pa + stats.pb
-			+ stats.sa + stats.sb + stats.ss 
-			+ stats.ra + stats.rb + stats.rr
-			+ stats.rra + stats.rrb + stats.rrr);
+		+ stats.sa + stats.sb + stats.ss
+		+ stats.ra + stats.rb + stats.rr
+		+ stats.rra + stats.rrb + stats.rrr);
 }
 
-static void print_stats(t_stats stats)
+static void	print_stats(t_stats stats)
 {
 	ft_printf_fd(STDERR_FILENO, "total_ops:  %d\n", stats.total);
 	ft_printf_fd(STDERR_FILENO, "sa:  %i  ", stats.sa);
@@ -36,6 +48,7 @@ static void print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
+<<<<<<< HEAD
 static char *get_order(t_context *ctx){
 	if (ctx->strategy == STRATEGY_SIMPLE)
 		return ("O(n^2)");
@@ -46,22 +59,24 @@ static char *get_order(t_context *ctx){
 	else if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
 	else if(ctx->disorder < MEDIUM_SORT_MAX_DISORDER) return ("O(n√n)");
 	else return ("O(n log n)");
+=======
+static char	*get_order(t_context *ctx)
+{
+	if (ctx->disorder < SIMPLE_SORT_MAX_DISORDER)
+		return ("O(n^2)");
+	else if (ctx->disorder < MEDIUM_SORT_MAX_DISORDER)
+		return ("O(n√n)");
+	else
+		return ("O(n log n)");
+>>>>>>> e6d2ffc84e220975de7400f3dc416e1aa35dc607
 }
 
-//static char	*get_disorder_str(double disorder)
-//{
-//	int	disorder_intpart;
-//	int	disorder_minpart;
-
-//	disorder_intpart = ceil(disorder);
-//	disorder_minpart = 
-//}
-
-void print_bench(t_context *ctx){
+void	print_bench(t_context *ctx)
+{
 	ctx->stats.total = set_total_ops(ctx->stats);
-	//ft_printf_fd(STDERR_FILENO, "disorder:  %s%\n", get_disorder_str(ctx->disorder));
 	print_disorder(ctx->disorder);
-	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
+	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n",
+		get_strategy_name(ctx->strategy), get_order(ctx));
 	print_stats(ctx->stats);
-  return ;
+	return ;
 }
