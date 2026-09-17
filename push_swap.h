@@ -67,6 +67,7 @@ void simple_sort(t_stack *a, t_stack *b, t_context *ctx);
 void medium_sort(t_stack *a, t_stack *b, t_context *ctx);
 void complex_sort(t_stack *a, t_stack *b, t_context *ctx);
 void print_bench(t_context *ctx);
+void print_disorder(double disorder);
 
 /* stack */
 t_node *node_new(int value);

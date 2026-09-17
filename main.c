@@ -12,10 +12,6 @@
 
 #include "push_swap.h"
 
-static void	sort(t_stack *a, t_stack *b, t_context *ctx);
-static void	sort_mini(t_stack *a, t_context *ctx);
-static void	sort_three(t_stack *a, t_context *ctx);
-
 static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 {
 	t_strategy	strategy;
@@ -40,18 +36,6 @@ static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 	}
 }
 
-static void	sort_mini(t_stack *a, t_context *ctx)
-{
-	if (a->size == 2)
-	{
-		if (a->head->value > a->tail->value)
-			sa(a, ctx);
-	}
-	else
-		sort_three(a, ctx);
-	return ;
-}
-
 static void	sort_three(t_stack *a, t_context *ctx)
 {
 	int	first;
@@ -73,6 +57,18 @@ static void	sort_three(t_stack *a, t_context *ctx)
 	}
 	if (a->head->value > a->head->next->value)
 		sa(a, ctx);
+}
+
+static void	sort_mini(t_stack *a, t_context *ctx)
+{
+	if (a->size == 2)
+	{
+		if (a->head->value > a->tail->value)
+			sa(a, ctx);
+	}
+	else
+		sort_three(a, ctx);
+	return ;
 }
 
 int	main(int argc, char **argv)

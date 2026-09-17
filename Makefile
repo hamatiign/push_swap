@@ -28,7 +28,8 @@ SRCS = \
 	sort/medium_sort.c \
 	sort/simple_sort.c \
 	bench.c \
-	disorder.c
+	disorder.c \
+	print_disorder.c
 
 TEST_SRCS = \
 	testmain.c \
