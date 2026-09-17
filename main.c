@@ -6,7 +6,7 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 20:59:46 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/17 21:02:26 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/18 01:11:14 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 		complex_sort(a, b, ctx);
 	else
 	{
-		if (disorder < SIMPLE_SORT_MAX_DISORDER)
+		if (a->size <= 3)
+			sort_mini(&a, &ctx);
+		else if (disorder < SIMPLE_SORT_MAX_DISORDER)
 			simple_sort(a, b, ctx);
 		else if (disorder < MEDIUM_SORT_MAX_DISORDER)
 			medium_sort(a, b, ctx);
@@ -90,10 +92,7 @@ int	main(int argc, char **argv)
 	stack_init(&b);
 	stats_init(&(ctx.stats));
 	ctx.disorder = compute_disorder(&a);
-	if (a.size <= 3)
-		sort_mini(&a, &ctx);
-	else
-		sort(&a, &b, &ctx);
+	sort(&a, &b, &ctx);
 	if (ctx.bench)
 		print_bench(&ctx);
 	stack_clear(&a);
