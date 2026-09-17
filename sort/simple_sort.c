@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_sort.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 19:13:21 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 19:16:03 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void simple_sort(t_stack *a, t_stack *b, t_context *ctx)
+void	simple_sort(t_stack *a, t_stack *b, t_context *ctx)
 {
 	const int	stack_size = a->size;
 	int			i;
@@ -17,13 +29,15 @@ void simple_sort(t_stack *a, t_stack *b, t_context *ctx)
 		if (a_min_index <= a_size / 2)
 		{
 			while (a_min_index-- > 0)
-				ra(a,ctx);
-		} else {
-			while (a_min_index++ < a_size)
-				rra(a,ctx);
+				ra(a, ctx);
 		}
-		pb(a, b,ctx);
+		else
+		{
+			while (a_min_index++ < a_size)
+				rra(a, ctx);
+		}
+		pb(a, b, ctx);
 	}
 	while (b->size > 0)
-		pa(a, b,ctx);
+		pa(a, b, ctx);
 }

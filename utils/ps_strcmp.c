@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 19:01:48 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 19:02:21 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int	ps_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s2 && *s1 == *s2)
@@ -6,5 +18,4 @@ int	ps_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
-
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   complex_sort.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 19:20:33 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 19:20:57 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 static int	get_max_bits(int size)
@@ -21,10 +33,10 @@ void	complex_sort(t_stack *a, t_stack *b, t_context *ctx)
 	int		bit;
 	int		a_size;
 	int		i;
-	
+
 	a_size = a->size;
 	max_bits = get_max_bits(a_size);
-	bit	= 0;
+	bit = 0;
 	while (bit < max_bits)
 	{
 		i = 0;

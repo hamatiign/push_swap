@@ -6,7 +6,7 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 20:42:32 by nkato             #+#    #+#             */
-/*   Updated: 2026/09/16 21:26:28 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/17 19:03:28 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static int	check_base_error(char *base)
 	return (0);
 }
 
-static int	putnbr_base_recursion(int fd, char *base, size_t base_len, uintptr_t nbr)
+static int	putnbr_base_recursion(int fd,
+	char *base, size_t base_len, uintptr_t nbr)
 {
 	uintptr_t	quotient;
 	uintptr_t	remainder;

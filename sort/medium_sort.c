@@ -1,32 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   medium_sort.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 19:16:49 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 19:20:09 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 #include <math.h>
 
-void medium_sort(t_stack *a, t_stack *b, t_context *ctx) {
-  const int chunk_size = ceil(sqrt(a->size));
-  int chunk_number = 0;
-  int size;
-  while (a->size > 0) {
-    size = a->size;
-    while (size-- > 0) {
-      if (a->head->rank >= chunk_size * chunk_number &&
-          a->head->rank < chunk_size * (chunk_number + 1)) {
-        pb(a, b, ctx);
-      } else
-        ra(a, ctx);
-    }
-    chunk_number++;
-  }
+void	medium_sort(t_stack *a, t_stack *b, t_context *ctx)
+{
+	const int	chunk_size = ceil(sqrt(a->size));
+	int			chunk_number;
+	int			size;
+	int			max_node_index;
 
-  int max_node_index;
-  while (b->head) {
-    max_node_index = get_node_index(b, get_max_node(b));
-    if (max_node_index <= b->size / 2) {
-      while (max_node_index-- > 0)
-        rb(b, ctx);
-    } else {
-      while (max_node_index++ < b->size)
-        rrb(b, ctx);
-    }
-    pa(a, b, ctx);
-  }
+	chunk_number = 0;
+	while (a->size > 0)
+	{
+		size = a->size;
+		while (size-- > 0)
+		{
+			if (a->head->rank >= chunk_size * chunk_number
+				&& a->head->rank < chunk_size * (chunk_number + 1))
+			{
+				pb(a, b, ctx);
+			}
+			else
+				ra(a, ctx);
+		}
+		chunk_number++;
+	}
+	while (b->head)
+	{
+		max_node_index = get_node_index(b, get_max_node(b));
+		if (max_node_index <= b->size / 2)
+		{
+			while (max_node_index-- > 0)
+				rb(b, ctx);
+		}
+		else
+		{
+			while (max_node_index++ < b->size)
+				rrb(b, ctx);
+		}
+		pa(a, b, ctx);
+	}
 }
