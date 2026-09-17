@@ -6,7 +6,7 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 19:16:49 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/18 00:14:20 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/18 02:06:32 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	medium_sort(t_stack *a, t_stack *b, t_context *ctx)
 	const int	chunk_size = ceil_sqrt(a->size);
 	int			chunk_number;
 	int			size;
-	int			max_node_index;
 
 	chunk_number = 0;
 	while (a->size > 0)

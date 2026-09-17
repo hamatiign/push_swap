@@ -6,7 +6,7 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 20:28:52 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/18 00:51:49 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/18 02:06:01 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	medium_sort(t_stack *a, t_stack *b, t_context *ctx);
 void	complex_sort(t_stack *a, t_stack *b, t_context *ctx);
 void	print_bench(t_context *ctx);
 void	print_disorder(double disorder);
+int		parse_args(t_stack *a, t_context *ctx, int argc, char **argv);
 
 /* stack */
 t_node	*node_new(int value);
