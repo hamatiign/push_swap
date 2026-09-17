@@ -25,10 +25,8 @@ static char	*get_strategy_name(const t_strategy strategy)
 
 static int	set_total_ops(t_stats stats)
 {
-	return (stats.pa + stats.pb
-		+ stats.sa + stats.sb + stats.ss
-		+ stats.ra + stats.rb + stats.rr
-		+ stats.rra + stats.rrb + stats.rrr);
+	return (stats.pa + stats.pb + stats.sa + stats.sb + stats.ss + stats.ra
+		+ stats.rb + stats.rr + stats.rra + stats.rrb + stats.rrr);
 }
 
 static void	print_stats(t_stats stats)
@@ -47,16 +45,20 @@ static void	print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
-static char *get_order(t_context *ctx){
+static char	*get_order(t_context *ctx)
+{
 	if (ctx->strategy == STRATEGY_SIMPLE)
 		return ("O(n^2)");
 	else if (ctx->strategy == STRATEGY_MEDIUM)
 		return ("O(n√n)");
 	else if (ctx->strategy == STRATEGY_COMPLEX)
 		return ("O(n log n)");
-	else if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
-	else if(ctx->disorder < MEDIUM_SORT_MAX_DISORDER) return ("O(n√n)");
-	else return ("O(n log n)");
+	else if (ctx->disorder < SIMPLE_SORT_MAX_DISORDER)
+		return ("O(n^2)");
+	else if (ctx->disorder < MEDIUM_SORT_MAX_DISORDER)
+		return ("O(n√n)");
+	else
+		return ("O(n log n)");
 }
 
 void	print_bench(t_context *ctx)

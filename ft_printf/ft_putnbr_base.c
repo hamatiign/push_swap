@@ -62,8 +62,8 @@ static int	check_base_error(char *base)
 	return (0);
 }
 
-static int	putnbr_base_recursion(int fd,
-	char *base, size_t base_len, uintptr_t nbr)
+static int	putnbr_base_recursion(int fd, char *base, size_t base_len,
+		uintptr_t nbr)
 {
 	uintptr_t	quotient;
 	uintptr_t	remainder;

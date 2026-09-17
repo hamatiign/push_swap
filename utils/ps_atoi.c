@@ -6,15 +6,15 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 19:03:57 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/17 20:17:47 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/18 02:45:17 by nkato            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <limits.h>
 
-static int	ps_atoi_core(const char *s,
-	long long *result, const int sign, int *value)
+static int	ps_atoi_core(const char *s, long long *result, const int sign,
+		int *value)
 {
 	while (*s)
 	{
@@ -23,7 +23,7 @@ static int	ps_atoi_core(const char *s,
 		*result = *result * 10 + (*s - '0');
 		if (sign == 1 && *result > (INT_MAX))
 			return (0);
-		if (sign == -1 && - *result < (INT_MIN))
+		if (sign == -1 && -(*result) < (INT_MIN))
 			return (0);
 		s++;
 	}

@@ -29,10 +29,10 @@ static int	get_max_bits(int size)
 
 void	complex_sort(t_stack *a, t_stack *b, t_context *ctx)
 {
-	int		max_bits;
-	int		bit;
-	int		a_size;
-	int		i;
+	int	max_bits;
+	int	bit;
+	int	a_size;
+	int	i;
 
 	a_size = a->size;
 	max_bits = get_max_bits(a_size);

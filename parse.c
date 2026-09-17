@@ -75,7 +75,7 @@ static int	fill_stack(t_stack *a, char **argv, int i, const int argc)
 
 int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (!a || !ctx || !argv)
