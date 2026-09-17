@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <math.h>
 
 static char	*get_strategy_name(const t_strategy strategy)
 {
@@ -35,9 +36,18 @@ static void print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
+static char	*get_disorder_str(double disorder)
+{
+	int	disorder_intpart;
+	int	disorder_minpart;
+
+	disorder_intpart = ceil(disorder);
+	disorder_minpart = 
+}
+
 void print_bench(t_context *ctx){
 	ctx->stats.total = set_total_ops(ctx->stats);
-	ft_printf_fd(STDERR_FILENO, "disorder:  %.2f%%\n", ctx->disorder);
+	ft_printf_fd(STDERR_FILENO, "disorder:  %s%\n", get_disorder_str(ctx->disorder));
 	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n", get_strategy_name(ctx->strategy));
 	print_stats(ctx->stats);
   return ;
