@@ -37,10 +37,15 @@ static void print_stats(t_stats stats)
 }
 
 static char *get_order(t_context *ctx){
-	if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
+	if (ctx->strategy == STRATEGY_SIMPLE)
+		return ("O(n^2)");
+	else if (ctx->strategy == STRATEGY_MEDIUM)
+		return ("O(n√n)");
+	else if (ctx->strategy == STRATEGY_COMPLEX)
+		return ("O(n log n)");
+	else if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
 	else if(ctx->disorder < MEDIUM_SORT_MAX_DISORDER) return ("O(n√n)");
 	else return ("O(n log n)");
-	
 }
 
 //static char	*get_disorder_str(double disorder)

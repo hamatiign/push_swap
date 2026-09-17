@@ -61,6 +61,7 @@ static void	sort_three(t_stack *a, t_context *ctx)
 
 static void	sort_mini(t_stack *a, t_context *ctx)
 {
+	if(a->size == 1) return;
 	if (a->size == 2)
 	{
 		if (a->head->value > a->tail->value)
@@ -92,7 +93,7 @@ int	main(int argc, char **argv)
 	ctx.disorder = compute_disorder(&a);
 	if (a.size <= 3)
 		sort_mini(&a, &ctx);
-	else
+	else if(!is_sorted(&a))
 		sort(&a, &b, &ctx);
 	if (ctx.bench)
 		print_bench(&ctx);

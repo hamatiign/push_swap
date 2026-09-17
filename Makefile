@@ -1,6 +1,4 @@
 NAME = push_swap
-TEST_NAME = test_push_swap
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -9,8 +7,8 @@ SRCS = \
 	parse.c \
 	operations/push_operations.c \
 	operations/swap_operations.c \
-	operations/rotate_operations.c\
-	operations/rev_rotate_operations.c\
+	operations/rotate_operations.c \
+	operations/rev_rotate_operations.c \
 	lst_utils/node_new.c \
 	lst_utils/stack_add_back.c \
 	lst_utils/stack_add_front.c \
@@ -31,10 +29,6 @@ SRCS = \
 	disorder.c \
 	print_disorder.c
 
-TEST_SRCS = \
-	testmain.c \
-	$(filter-out main.c, $(SRCS))
-
 PRINTF_SRCS = \
 	ft_printf/ft_print_char.c \
 	ft_printf/ft_print_hex.c \
@@ -48,7 +42,6 @@ PRINTF_SRCS = \
 
 
 OBJS = $(SRCS:.c=.o)
-TEST_OBJS = $(TEST_SRCS:.c=.o)
 PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
 
 all: $(NAME)
@@ -56,20 +49,15 @@ all: $(NAME)
 $(NAME): $(OBJS) $(PRINTF_OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(PRINTF_OBJS) -lm -o $(NAME)
 
-test: $(TEST_NAME)
-
-$(TEST_NAME): $(TEST_OBJS) $(PRINTF_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(PRINTF_OBJS) -lm -o $(TEST_NAME)
-
 %.o: %.c push_swap.h ft_printf/ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TEST_OBJS) $(PRINTF_OBJS)
+	rm -f $(OBJS) $(PRINTF_OBJS)
 
 fclean: clean
-	rm -f $(NAME) $(TEST_NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re

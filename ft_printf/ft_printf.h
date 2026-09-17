@@ -17,7 +17,7 @@
 # include <stdint.h>
 # include <unistd.h>
 
-int	ft_printf(int fd, const char *format, ...);
+int	ft_printf_fd(int fd, const char *format, ...);
 int	ft_print_char(int fd, int c);
 int	ft_print_string(int fd, char *str);
 int	ft_print_ptr(int fd, void *ptr);
