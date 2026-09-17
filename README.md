@@ -1,223 +1,250 @@
-*This project has been created as part of the 42 curriculum by <nkato>, <kkajikaw>.*
-
-ARG=$(shuf -i 1-5000 -n 500); ./push_swap --bench --complex $ARG |./checker_linux $ARG
-
-ARG="-3 -2"; ./push_swap $ARG | ./checker_linux $ARG
-zsh じゃなくて bashで実行する　さもないとARGが空白入りの文字列として認識されてしまうため
-
-
-
-
+*This project has been created as part of the 42 curriculum by nkato, kkajikaw.*
 
 # push_swap
 
-## 目次
-- [概要 (Description)](#概要-description)
-- [使い方 (Instructions)](#使い方-instructions)
-- [アルゴリズムの説明と根拠](#アルゴリズムの説明と根拠)
-- [ベンチマーク](#ベンチマーク)
-- [ボーナス: checker](#ボーナス-checker)
-- [参考資料 (Resources)](#参考資料-resources)
-- [各自の貢献](#各自の貢献)
+## Description
 
----
+`push_swap` is a C program that sorts a list of unique integers in ascending order.
+It does not move values freely: it must generate a sequence composed only of the
+11 operations allowed by the subject and operate on two stacks, `a` and `b`.
 
-## 概要 (Description)
+The first argument is the top of stack `a`, and stack `b` starts empty. The program
+writes only sorting operations to standard output. Its main purpose is to compare
+algorithmic complexity using the number of generated Push_swap operations as the
+cost model.
 
-`push_swap` は、2つのスタック（`a`, `b`）と限られた操作命令だけを使って、整数の集合を昇順に並び替えるためのプログラムです。
+This implementation contains all four required strategies:
 
-本課題の目的は、アルゴリズムの計算量（時間・空間）を「push_swap操作の生成数」という具体的な指標を通じて体感的に理解することにあります。単に「動く」ソートを書くのではなく、入力の乱雑さ（disorder）に応じて最適な戦略を選択する適応的な実装を行いました。
-
-本プロジェクトでは、要件に従い以下の4つの戦略を実装し、実行時に切り替え可能にしています。
-
-| 戦略 | 選択フラグ | 計算量クラス | 採用アルゴリズム |
+| Strategy | Option | Algorithm | Operation upper bound |
 |---|---|---|---|
-| Simple | `--simple` | O(n²) | 選択ソート (Selection Sort) |
-| Medium | `--medium` | O(n√n) | 座標圧縮を用いたチャンクソート (Chunk Sort) |
-| Complex | `--complex` | O(n log n) | 座標圧縮を用いた基数ソート (Radix Sort) |
-| Adaptive | `--adaptive` (デフォルト) | disorderに応じて動的選択 | 上記3つを disorder 値に基づき使い分け |
+| Simple | `--simple` | Minimum extraction / selection sort | O(n²) |
+| Medium | `--medium` | √n-sized chunk sort | O(n√n) |
+| Complex | `--complex` | Binary LSD radix sort | O(n log n) |
+| Adaptive | `--adaptive` | Selects a strategy from the initial disorder | Depends on the selected regime |
 
----
+`--adaptive` is used when no strategy option is given.
 
-## 使い方 (Instructions)
+## Instructions
 
-### ビルド
+### Build
 
-```bash
+Requirements are a C compiler, `make`, and a POSIX-like environment.
+
+```sh
 make
 ```
 
-- `Makefile` は `$(NAME)`, `all`, `clean`, `fclean`, `re` ルールを含みます。
-- コンパイルフラグ: `-Wall -Wextra -Werror`（`cc` 使用）
-- ボーナス（checker）をビルドする場合:
+The Makefile builds the `push_swap` executable with `cc` and the flags
+`-Wall -Wextra -Werror`.
 
-```bash
-make bonus
+Other available rules are:
+
+```sh
+make clean   # Remove object files
+make fclean  # Remove object files and the executable
+make re      # Rebuild the project from scratch
 ```
 
-### 実行
+### Run
 
-```bash
-./push_swap [オプション] <整数のリスト>
+```sh
+./push_swap [--bench] [--simple|--medium|--complex|--adaptive] <integer ...>
 ```
 
-例:
+The benchmark and strategy options may appear in either order, but they must come
+before the integers. A benchmark option or strategy option cannot be repeated, and
+only one strategy may be selected.
 
-```bash
+Examples:
+
+```sh
 ./push_swap 2 1 3 6 5 8
+./push_swap --simple 5 4 3 2 1
+./push_swap --complex --bench 4 67 3 87 23
+./push_swap --bench --adaptive -3 8 0 -10 4
 ```
 
-#### 戦略の指定（オプション）
+With no arguments, the program prints nothing. Invalid integers, values outside the
+`int` range, duplicate values, unknown options, or conflicting options produce
+`Error\n` on standard error and a non-zero exit status.
 
-```bash
-./push_swap --simple 5 4 3 2 1     # O(n²) 選択ソートを強制
-./push_swap --medium 5 4 3 2 1     # O(n√n) チャンクソートを強制
-./push_swap --complex 5 4 3 2 1    # O(n log n) 基数ソートを強制
-./push_swap --adaptive 5 4 3 2 1   # disorderに応じて自動選択（デフォルト）
+### Validate the operation stream
+
+When a compatible checker supplied for evaluation is available, the output can be
+validated as follows:
+
+The following command relies on POSIX `sh`/Bash word splitting. In zsh, replace
+each `$ARG` with `${=ARG}`.
+
+```sh
+ARG="4 67 3 87 23"
+./push_swap --complex $ARG | ./checker_linux $ARG
 ```
 
-- 引数が無い場合は何も出力せずプロンプトに戻ります。
-- 引数が整数でない、範囲外、重複がある等の場合は標準エラー出力に `Error` を出力します。
+A correctly sorted stack produces `OK` from the checker.
 
-#### ベンチマークモード
+## Allowed operations
 
-```bash
-./push_swap --bench <整数のリスト>
+| Operation | Effect |
+|---|---|
+| `sa`, `sb` | Swap the first two elements of `a` or `b` |
+| `ss` | Execute `sa` and `sb` together |
+| `pa`, `pb` | Push the top element onto `a` or `b` |
+| `ra`, `rb` | Rotate `a` or `b`; the first element becomes the last |
+| `rr` | Execute `ra` and `rb` together |
+| `rra`, `rrb` | Reverse-rotate `a` or `b`; the last element becomes the first |
+| `rrr` | Execute `rra` and `rrb` together |
+
+Each generated operation is followed by `\n`; no diagnostic text is mixed into the
+standard-output operation stream.
+
+## Algorithm design and rationale
+
+### Coordinate compression
+
+Before sorting, each node receives a rank from `0` to `n - 1` according to its value.
+The original integer values remain unchanged, while the ranks provide a compact,
+non-negative range for chunk boundaries and bitwise radix sorting. This also allows
+negative values and the complete `int` range to be handled uniformly.
+
+### Disorder metric
+
+Disorder is measured before any operation is executed. For every pair `i < j`, the
+pair counts as a mistake when `a[i] > a[j]`:
+
+```text
+disorder = number_of_inversions / number_of_pairs
 ```
 
-標準エラー出力に以下を表示します（操作列自体は標準出力のまま）:
-- 計算した disorder（%、小数点2桁）
-- 使用した戦略名とその理論計算量クラス
-- 総操作数
-- 各操作種別（`sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr`）の回数
+It lies between `0` and `1`: `0` is already sorted and `1` is reverse-sorted. The
+calculation examines every pair, so its C-side analysis time is O(n²), but it emits no
+Push_swap operation.
 
-#### checker との連携（ボーナス）
+### Simple: minimum extraction
 
-```bash
-./push_swap 2 1 3 6 5 8 | ./checker 2 1 3 6 5 8
-```
+The Simple strategy repeatedly finds the minimum value remaining in `a`. It chooses
+`ra` or `rra`, whichever brings that value to the top with fewer operations, then
+pushes it to `b` with `pb`. Once the remaining part of `a` is sorted, all saved values
+are restored with `pa`.
 
-`OK` または `KO` が標準出力に表示されます。
+At most O(n) rotations are needed for each of O(n) extracted values, giving an O(n²)
+upper bound in the Push_swap operation model. This strategy was selected as a clear
+baseline with simple invariants and predictable behavior.
 
----
+### Medium: chunk sort
 
-## アルゴリズムの説明と根拠
+The Medium strategy uses chunks whose width is approximately `√n` ranks. It scans
+`a` once for each rank interval: values in the current interval are pushed to `b`, and
+other values are rotated in `a`. After all chunks have been transferred, the maximum
+remaining value in `b` is brought to the top with the shorter of `rb` and `rrb`, then
+pushed back to `a`.
 
-### disorder（乱雑度）の測定
+There are O(√n) chunks and each distribution scan costs at most O(n) operations.
+Values belonging to the same chunk remain grouped in `b`, bounding the restoration
+work by O(√n) rotations per value. The resulting operation upper bound is O(n√n).
+This provides a middle ground between the baseline and radix strategies.
 
-ソートを行う前に、スタック `a` 内の全ペアを比較し、「大きい数が小さい数より前にある」ペアの数（mistakes）を数え、全ペア数で割ることで disorder（0〜1）を算出しています。この値は移動を一切行う前に計算されます。
+### Complex: binary LSD radix sort
 
-```
-disorder = mistakes / total_pairs
-```
+The Complex strategy processes compressed ranks from the least-significant bit to the
+most-significant bit. For each bit, a zero bit is sent to `b` with `pb`, while a one bit
+is kept in `a` with `ra`. All values in `b` are then returned with `pa` before the next
+bit is processed.
 
-### 1. Simple 戦略: 選択ソート（O(n²)）
+Ranks from `0` to `n - 1` require O(log n) bits, and every bit pass performs O(n)
+operations. The operation upper bound is therefore O(n log n). Radix sort was chosen
+because its cost is stable even for highly disordered inputs.
 
-最小値を探して先頭（トップ）に持ってくる、という操作を繰り返す方式です。
+### Adaptive strategy
 
-- 未ソート部分から最小値を探索し、`ra`（または `rra`）で回転させてスタックのトップに移動させます。
-- トップに来た最小値を `pb` で `b` に退避し、これを繰り返します。
-- 全要素の選択が終わったら `pa` で `a` に戻し、ソート済みの列を完成させます。
-- 比較・回転ともに要素数に比例するため、全体で **O(n²)** の操作数になります。実装がシンプルで、小規模・低乱雑度の入力に適しています。
+The Adaptive strategy uses the mandatory disorder boundaries:
 
-### 2. Medium 戦略: 座標圧縮を用いたチャンクソート（O(n√n)）
-
-座標圧縮（値を順位に変換し扱いやすい整数レンジにする）を行った上で、値の範囲を `√n` 個のチャンク（区間）に分割し、チャンク単位でソートを行う方式です。
-
-- まず全要素の順位（0〜n-1）を求め、座標圧縮した値として扱う。
-- 値の範囲を `√n` 個のチャンクに分割し、各要素がどのチャンクに属するかを判定する。
-- チャンクを昇順に処理し、各チャンクに属する要素だけを `a` から探し出して `b` に退避 → 押し戻す、という手順を繰り返す。
-- チャンク数・チャンク内探索のコストがともに `O(√n)` のオーダーになるため、全体で **O(n√n)** の操作数となります。
-
-### 3. Complex 戦略: 座標圧縮を用いた基数ソート（O(n log n)）
-
-座標圧縮によって値を `0` 〜 `n-1` の整数（`log₂n` ビットで表現可能）に変換した上で、LSD（下位桁優先）基数ソートをビット単位で `a`/`b` の2スタック間で行う方式です。
-
-- 座標圧縮により、値を `0` から `n-1` までの整数に変換する（元の大小関係を保持）。
-- 最下位ビットから順に、ビットが0の要素は `a` に残し、1の要素は `pb` で `b` に退避する処理を、必要ビット数（`⌈log₂n⌉`）だけ繰り返す。
-- 各ビットの処理は `a`（および `b`）を1周する操作で済むため `O(n)`、これを `log₂n` 回繰り返すことで全体 **O(n log n)** の操作数を達成します。
-
-### 4. Adaptive 戦略（学習者独自設計）
-
-disorder の値に応じて、上記3つの内部手法を切り替える適応戦略です。
-
-| disorder | 適用戦略 | 計算量目標 |
+| Initial disorder | Internal strategy | Operation upper bound |
 |---|---|---|
-| < 0.2 | 選択ソート（Simple） | O(n²) |
-| 0.2 以上 0.5 未満 | 座標圧縮チャンクソート（Medium） | O(n√n) |
-| ≥ 0.5 | 座標圧縮基数ソート（Complex） | O(n log n) |
+| `disorder < 0.2` | Simple | O(n²) |
+| `0.2 <= disorder < 0.5` | Medium | O(n√n) |
+| `disorder >= 0.5` | Complex | O(n log n) |
 
-**閾値設定の理由:**
-- disorder が低い（ほぼソート済み）場合、選択ソートのような単純な手法でも実際の移動回数は少なく済むため、実装コストの低い O(n²) 手法で十分にコストパフォーマンスが良いと判断しました。
-- disorder が中程度の場合、完全にランダムというわけではなく部分的な構造が残っているため、チャンク単位で大まかに分割してから細かく整えるチャンクソートが効果的だと考えました。
-- disorder が高い（ほぼ最悪順序に近い）場合は、要素間の比較に依存しない基数ソートの方が、比較ベースの手法よりも安定して少ない操作数でソートできるため、この regime を担当させています。
+Inputs of at most three values use a dedicated small-sort path. For larger inputs,
+low-disorder data uses the straightforward baseline, medium-disorder data uses chunk
+partitioning, and high-disorder data uses the input-order-independent radix passes.
+These thresholds satisfy the regimes specified by the subject while selecting the
+more scalable strategy as disorder increases.
 
-**計算量の主張（Push_swap操作モデルにおける上限）:**
-- 時間（操作数）: 各戦略の項で述べた通り、それぞれ O(n²), O(n√n), O(n log n) が上限。
-- 空間: いずれの戦略も、要素数に比例した配列・スタック（`a`, `b` 双方向連結リストなど）以外に追加のヒープ確保は行っておらず、**O(n)** の空間で完結します。
+All strategies store the input as linked-list nodes, so total program storage is O(n).
+The sorting procedures allocate no additional array proportional to `n`; excluding the
+input stacks, their auxiliary space is O(1).
 
----
+## Benchmark mode
 
-## ベンチマーク
+`--bench` leaves the operation stream on standard output and writes metrics to
+standard error after sorting. It reports:
 
-`--bench` オプションを使うと、実際の disorder・使用戦略・操作数の内訳を確認できます。
+- Initial disorder as a percentage with two decimal places.
+- Selected strategy and the corresponding theoretical complexity class.
+- Total generated operation count.
+- Individual counts for `sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`,
+  `rrb`, and `rrr`.
 
-```bash
-shuf -i 0-9999 -n 500 > args.txt
-./push_swap --bench $(cat args.txt) 2> bench.txt | ./checker $(cat args.txt)
+Example that keeps the two streams separate:
+
+This example also targets POSIX `sh`/Bash. In zsh, replace each `$ARG` with
+`${=ARG}`.
+
+```sh
+ARG="4 67 3 87 23"
+./push_swap --bench --complex $ARG 2> bench.txt | ./checker_linux $ARG
 cat bench.txt
 ```
 
-目標値（100個 / 500個のランダム値に対する操作数）:
+The subject's required performance thresholds for random inputs are:
 
-| 個数 | 合格ライン | 良好 | 優秀 |
-|---|---|---|---|
-| 100 | < 2000 | < 1500 | < 700 |
-| 500 | < 12000 | < 8000 | < 5500 |
+| Input size | Minimum requirement | Good | Excellent |
+|---|---:|---:|---:|
+| 100 | fewer than 2000 operations | fewer than 1500 | fewer than 700 |
+| 500 | fewer than 12000 operations | fewer than 8000 | fewer than 5500 |
 
----
+## Resources
+- [基数ソート - Wikipedia](https://ja.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E3%82%BD%E3%83%BC%E3%83%88) —
+  Radix Sortの基本概念
 
-## ボーナス: checker
+- [Push swapアルゴリズム実装メモ：座標圧縮の活用](https://qiita.com/jiku0730/items/f5ba2878b03bf967dd33) —
+  座標圧縮の考え方
 
-`checker` は、`push_swap` が生成した操作列を標準入力から読み込み、実際に指定したスタック `a` を正しくソートできているかを検証するプログラムです。
+- [push_swap MoriP Sort 42Tokyo #1](https://qiita.com/MoriP-K/items/54ee96dc634148cf40a8) —
+  Push_swapにおけるソート設計
 
-```bash
-./push_swap <整数のリスト> | ./checker <整数のリスト>
-```
+- [APG4b: 計算量](https://atcoder.jp/contests/apg4b/tasks/APG4b_w?lang=ja) —
+  Big-O記法と計算量
 
-- 正しくソートされ `b` が空であれば `OK`
-- そうでなければ `KO`
-- 不正な引数や不正な命令の場合は `Error` を標準エラーに出力
+- *Push_swap subject, version 1.1* — 本課題の要件
 
----
+### Use of AI
 
-## 参考資料 (Resources)
+- AI was used to help understand code written by teammates and assist with test
+  execution.
 
-### ドキュメント・参考文献
-- Donald Knuth, *The Art of Computer Programming*, Vol. 3: Sorting and Searching（計算量・比較ソートの基礎）
-- 選択ソート、基数ソート、バケット/チャンク型ソートに関する一般的なアルゴリズム解説（各自が参照した書籍・Webサイトを追記してください）
-- スタックのデータ構造に関する標準的なCS教材
+- AI was used to help choose variable names, understand sorting concepts, and learn
+  Git workflows.
 
-### AIの利用について
-本プロジェクトでは、以下の範囲でAIツール（Claude等）を利用しました。実装コード自体はすべて自分たちで記述し、AIの出力はアイデアの壁打ちや理解の確認に留めています。
+- AI was used to summarize and translate the assignment requirements.
 
-- **利用したタスクの例:**
-  - 座標圧縮の一般的な考え方や、チャンクソート・基数ソートをスタックベースの操作モデルにどう落とし込むかについての壁打ち
-  - README構成やドキュメントの体裁に関する助言
-  - デバッグ時の考え方の整理（実際のバグ修正は自分たちで実施）
-- **利用しなかったこと:**
-  - コアとなるソートロジック（selection_sort, chunk_sort, radix_sort, adaptive選択ロジック）そのものの自動生成
-  - Makefileや命令列生成部分の丸ごとの自動生成
+- AI was used as a supplementary tool for design discussions, code improvements, and
+  brainstorming.
 
-*（実際の利用状況に合わせて、上記を具体的に書き換えてください。）*
+- AI was used to extract the README requirements from the subject PDF and help
+  structure this document against the implemented code and Git history.
 
----
+We use generative AI strictly for auxiliary purposes, and whenever we use AI, we discuss the generated content as appropriate, compare it with the source code, and verify it as necessary using local tools. Both team members continue to bear the responsibility for understanding and explaining
+all submitted code and documentation.
 
-## 各自の貢献
 
-| 学習者 | 担当箇所 |
+## Team contributions
+
+The contribution summary below is based on the repository's Git history. Both members
+also participated in integration, review, minor changes to the source code, debugging, Norm compliance, and testing.
+
+| Login | Main contributions |
 |---|---|
-| <login1> | 例: スタック構造、simple(選択ソート)、medium(チャンクソート)の実装 |
-| <login2> | 例: complex(基数ソート)、adaptive戦略、disorder計算、checkerの実装 |
-
-両者とも全アルゴリズムを理解し、ディフェンス時にどの部分でも説明できるようにしています。
+| `nkato` | Initial stack/list foundation, input parsing and validation, early disorder calculation, Medium chunk-sort implementation, context integration, implementation of `ft_printf`, option-order handling, final integration fixes, and README development. |
+| `kkajikaw` | Rotate/reverse-rotate operations, rank-based coordinate compression, Simple and Complex strategies, small-input and Adaptive dispatch, benchmark/statistics output, disorder formatting, Norm refactoring, and README development. |
