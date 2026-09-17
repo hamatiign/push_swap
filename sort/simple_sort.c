@@ -6,7 +6,7 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 19:13:21 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/17 19:16:03 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/17 19:51:42 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	simple_sort(t_stack *a, t_stack *b, t_context *ctx)
 	int			a_min_index;
 
 	i = 0;
-	while (i++ < stack_size - 1)
+	while (i++ < stack_size - 1 && !is_sorted(a))
 	{
-		if (is_sorted(a))
-			break ;
 		a_min_index = get_node_index(a, get_min_node(a));
 		a_size = a->size;
 		if (a_min_index <= a_size / 2)

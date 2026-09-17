@@ -1,17 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 20:30:18 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 20:58:47 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// static int	is_option(char *s)
-// {
-// 	if (ps_strcmp(s, "--simple") == 0)
-// 		return (1);
-// 	if (ps_strcmp(s, "--medium") == 0)
-// 		return (1);
-// 	if (ps_strcmp(s, "--complex") == 0)
-// 		return (1);
-// 	if (ps_strcmp(s, "--adaptive") == 0)
-// 		return (1);
-// 	return (0);
-// }
+#include "push_swap.h"
 
 static int	parse_option(t_context *ctx, char *s)
 {
@@ -48,31 +47,19 @@ static int	has_duplicate(t_stack *a)
 	return (0);
 }
 
-int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
+static void	set_bench(char *s, int *bench_ptr)
 {
-	int		i;
+	if (ps_strcmp(s, "--bench") == 0)
+		*bench_ptr = 1;
+	else
+		*bench_ptr = 0;
+}
+
+static int	fill_stack(t_stack *a, char **argv, int i, const int argc)
+{
 	int		value;
 	t_node	*node;
 
-	i = 1;
-	value = 0;
-	if (!a || !ctx|| !argv)
-		return (0);
-	ctx->strategy = STRATEGY_ADAPTIVE;
-	if (ps_strcmp(argv[i], "--bench") == 0)
-	{
-		ctx->bench = 1;
-		i++;
-	} else
-		ctx->bench = 0;
-	// やりました is_optionとparse_optionの処理がかぶってるからリファクタリングしたい
-	if (i < argc)
-	{
-		if (parse_option(ctx, argv[i]))
-			i++;
-	}
-	if (i >= argc)
-		return (0);
 	while (i < argc)
 	{
 		if (!ps_atoi(argv[i], &value))
@@ -83,7 +70,23 @@ int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 		stack_add_back(a, node);
 		i++;
 	}
-	if (has_duplicate(a))
-		return (0);
 	return (1);
+}
+
+int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
+{
+	int		i;
+
+	i = 1;
+	if (!a || !ctx || !argv)
+		return (0);
+	ctx->strategy = STRATEGY_ADAPTIVE;
+	set_bench(argv[i], &(ctx->bench));
+	if (ctx->bench == 1)
+		i++;
+	if (i < argc && parse_option(ctx, argv[i]))
+		i++;
+	if (i >= argc || !fill_stack(a, argv, i, argc))
+		return (0);
+	return (!has_duplicate(a));
 }

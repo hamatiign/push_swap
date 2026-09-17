@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 20:59:46 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 21:02:26 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	sort(t_stack *a, t_stack *b, t_context *ctx)
@@ -23,6 +35,7 @@ static void	sort(t_stack *a, t_stack *b, t_context *ctx)
 			complex_sort(a, b, ctx);
 	}
 }
+
 static void	sort_three(t_stack *a, t_context *ctx)
 {
 	int	first;
@@ -45,6 +58,7 @@ static void	sort_three(t_stack *a, t_context *ctx)
 	if (a->head->value > a->head->next->value)
 		sa(a, ctx);
 }
+
 static void	sort_mini(t_stack *a, t_context *ctx)
 {
 	if (a->size == 2)
@@ -53,9 +67,7 @@ static void	sort_mini(t_stack *a, t_context *ctx)
 			sa(a, ctx);
 	}
 	else
-	{
 		sort_three(a, ctx);
-	}
 	return ;
 }
 
@@ -68,10 +80,6 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	stack_init(&a);
-	/* parse_args に--bench処理を追加する
-		＊argv[1]が--benchならargv[2]にSTRATEGY判定をする
-		みたいなことを多分かけた気がします
-		*/
 	if (!parse_args(&a, &ctx, argc, argv))
 	{
 		stack_clear(&a);
@@ -86,19 +94,9 @@ int	main(int argc, char **argv)
 		sort_mini(&a, &ctx);
 	else
 		sort(&a, &b, &ctx);
-	// bench表示
 	if (ctx.bench)
 		print_bench(&ctx);
 	stack_clear(&a);
 	stack_clear(&b);
 	return (0);
 }
-
-// ーーーテスト用コードーーーーー
-// stack_add_back(&a, node_new(5));
-// stack_add_back(&a, node_new(1));
-// stack_add_back(&a, node_new(7));
-// stack_add_back(&a, node_new(9));
-// stack_add_back(&b, node_new(3));
-// stack_add_back(&b, node_new(5));
-// ーーーテスト用コードーーーーー
