@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <math.h>
 
 static char	*get_strategy_name(const t_strategy strategy)
 {
@@ -48,7 +47,6 @@ static void	print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
-<<<<<<< HEAD
 static char *get_order(t_context *ctx){
 	if (ctx->strategy == STRATEGY_SIMPLE)
 		return ("O(n^2)");
@@ -59,16 +57,6 @@ static char *get_order(t_context *ctx){
 	else if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
 	else if(ctx->disorder < MEDIUM_SORT_MAX_DISORDER) return ("O(n√n)");
 	else return ("O(n log n)");
-=======
-static char	*get_order(t_context *ctx)
-{
-	if (ctx->disorder < SIMPLE_SORT_MAX_DISORDER)
-		return ("O(n^2)");
-	else if (ctx->disorder < MEDIUM_SORT_MAX_DISORDER)
-		return ("O(n√n)");
-	else
-		return ("O(n log n)");
->>>>>>> e6d2ffc84e220975de7400f3dc416e1aa35dc607
 }
 
 void	print_bench(t_context *ctx)
