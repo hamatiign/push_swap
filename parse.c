@@ -47,12 +47,30 @@ static int	has_duplicate(t_stack *a)
 	return (0);
 }
 
-static void	set_bench(char *s, int *bench_ptr)
+static int	parse_options(t_context *ctx, int argc, char **argv, int *i)
 {
-	if (ps_strcmp(s, "--bench") == 0)
-		*bench_ptr = 1;
-	else
-		*bench_ptr = 0;
+	int	strategy_set;
+
+	strategy_set = 0;
+	while (*i < argc)
+	{
+		if (ps_strcmp(argv[*i], "--bench") == 0)
+		{
+			if (ctx->bench)
+				return (0);
+			ctx->bench = 1;
+		}
+		else if (parse_option(ctx, argv[*i]))
+		{
+			if (strategy_set)
+				return (0);
+			strategy_set = 1;
+		}
+		else
+			break ;
+		(*i)++;
+	}
+	return (1);
 }
 
 static int	fill_stack(t_stack *a, char **argv, int i, const int argc)
@@ -81,11 +99,9 @@ int	parse_args(t_stack *a, t_context *ctx, int argc, char **argv)
 	if (!a || !ctx || !argv)
 		return (0);
 	ctx->strategy = STRATEGY_ADAPTIVE;
-	set_bench(argv[i], &(ctx->bench));
-	if (ctx->bench == 1)
-		i++;
-	if (i < argc && parse_option(ctx, argv[i]))
-		i++;
+	ctx->bench = 0;
+	if (!parse_options(ctx, argc, argv, &i))
+		return (0);
 	if (i >= argc || !fill_stack(a, argv, i, argc))
 		return (0);
 	return (!has_duplicate(a));
