@@ -45,12 +45,12 @@ void	rrb(t_stack *b, t_context *ctx)
 
 void	rrr(t_stack *a, t_stack *b, t_context *ctx)
 {
-	if (!a || a->size < 2)
+	if ((!a || a->size < 2) && (!b || b->size < 2))
 		return ;
-	if (!b || b->size < 2)
-		return ;
-	tail_to_head(a);
-	tail_to_head(b);
+	if (a && a->size >= 2)
+		tail_to_head(a);
+	if (b && b->size >= 2)
+		tail_to_head(b);
 	ctx->stats.rrr++;
 	write(STDOUT_FILENO, "rrr\n", 4);
 }

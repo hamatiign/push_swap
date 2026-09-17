@@ -50,12 +50,12 @@ void	sb(t_stack *b, t_context *ctx)
 
 void	ss(t_stack *a, t_stack *b, t_context *ctx)
 {
-	if (!a || a->size < 2)
+	if ((!a || a->size < 2) && (!b || b->size < 2))
 		return ;
-	if (!b || b->size < 2)
-		return ;
-	swap_top(a);
-	swap_top(b);
+	if (a && a->size >= 2)
+		swap_top(a);
+	if (b && b->size >= 2)
+		swap_top(b);
 	ctx->stats.ss++;
 	write(STDOUT_FILENO, "ss\n", 3);
 }
