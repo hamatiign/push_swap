@@ -6,7 +6,7 @@ void	print_disorder(double disorder)
 	int integer_part;
 	int decimal_part;
 	value = (int)((disorder + 0.00005) * 10000);
-	ft_printf_fd(STDERR_FILENO, "[bench] disorder: ");
+	ft_printf_fd(STDERR_FILENO, "disorder: ");
 	integer_part = value / 100;
 	decimal_part = value % 100;
 

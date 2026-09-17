@@ -36,6 +36,13 @@ static void print_stats(t_stats stats)
 	ft_printf_fd(STDERR_FILENO, "rrr:  %i\n", stats.rrr);
 }
 
+static char *get_order(t_context *ctx){
+	if(ctx->disorder < SIMPLE_SORT_MAX_DISORDER) return ("O(n^2)");
+	else if(ctx->disorder < MEDIUM_SORT_MAX_DISORDER) return ("O(n√n)");
+	else return ("O(n log n)");
+	
+}
+
 //static char	*get_disorder_str(double disorder)
 //{
 //	int	disorder_intpart;
@@ -49,7 +56,7 @@ void print_bench(t_context *ctx){
 	ctx->stats.total = set_total_ops(ctx->stats);
 	//ft_printf_fd(STDERR_FILENO, "disorder:  %s%\n", get_disorder_str(ctx->disorder));
 	print_disorder(ctx->disorder);
-	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n", get_strategy_name(ctx->strategy));
+	ft_printf_fd(STDERR_FILENO, "strategy:  %s / %s\n", get_strategy_name(ctx->strategy), get_order(ctx));
 	print_stats(ctx->stats);
   return ;
 }
