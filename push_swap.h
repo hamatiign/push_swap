@@ -1,12 +1,25 @@
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/17 20:28:52 by kkajikaw          #+#    #+#             */
+/*   Updated: 2026/09/17 20:28:53 by kkajikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include "ft_printf/ft_printf.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include <stdlib.h>
+# include <unistd.h>
+# include "ft_printf/ft_printf.h"
 
 # define SIMPLE_SORT_MAX_DISORDER  0.2
 # define MEDIUM_SORT_MAX_DISORDER  0.5
+
 typedef struct s_stats {
   int total;
   int sa;

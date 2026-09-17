@@ -6,16 +6,26 @@
 /*   By: kkajikaw <kkajikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 19:16:49 by kkajikaw          #+#    #+#             */
-/*   Updated: 2026/09/17 19:20:09 by kkajikaw         ###   ########.fr       */
+/*   Updated: 2026/09/17 19:47:23 by kkajikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <math.h>
 
+static int	ft_sqrt(int n)
+{
+	int	ans;
+
+	ans = 0;
+	while (ans * ans >= n)
+		ans++;
+	return (ans);
+}
+
 void	medium_sort(t_stack *a, t_stack *b, t_context *ctx)
 {
-	const int	chunk_size = ceil(sqrt(a->size));
+	const int	chunk_size = ft_sqrt(a->size);
 	int			chunk_number;
 	int			size;
 	int			max_node_index;
