@@ -7,7 +7,6 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = \
 	main.c \
 	parse.c \
-	print_stack.c \
 	operations/push_operations.c \
 	operations/swap_operations.c \
 	operations/rotate_operations.c\
